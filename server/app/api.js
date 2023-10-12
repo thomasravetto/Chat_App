@@ -2,6 +2,8 @@ const express = require('express');
 
 const loginRouter = require('./login/login.api');
 
-const router = express.Router();
+const api = express.Router();
 
-router.use('/login', apiRouter)
+api.use('/login', loginRouter);
+
+module.exports = api;

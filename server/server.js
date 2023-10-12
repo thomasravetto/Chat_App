@@ -12,3 +12,5 @@ function startServer () {
         console.log('Server listening on port: ', PORT);
     })
 }
+
+startServer();
