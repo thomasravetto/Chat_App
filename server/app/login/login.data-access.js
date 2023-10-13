@@ -1,9 +1,6 @@
-require('dotenv').config();
-
 // Initializing database connection
 // To be moved in server.js
-
-const knex = require('knex')({
+const db = require('knex')({
     client: 'pg',
     connection: {
       host : 'localhost',
@@ -16,7 +13,7 @@ const knex = require('knex')({
 
 async function findUserByUsername (email) {
     try {
-        const user = await knex('login').where({
+        const user = await db('login').where({
             email: email
         }).select('*');
 
@@ -29,7 +26,7 @@ async function findUserByUsername (email) {
 
 async function getUserData (email) {
     try {
-        const user = await knex('users').where({
+        const user = await db('users').where({
             email: email
         }).select('*');
 

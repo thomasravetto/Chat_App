@@ -5,13 +5,10 @@ const loginRouter = express.Router();
 
 const { loginUser } = require('./login.controller');
 
-// TODO: function to handle login auth
+// TODO: handle login authentication
 loginRouter.post('/', loginUser);
 
 // // TODO: function to handle Oauth2
 // loginRouter.post('/oauth', loginUserOauth);
-
-// // TODO: function to register user
-// loginRouter.post('/', registerUser);
 
 module.exports = loginRouter;

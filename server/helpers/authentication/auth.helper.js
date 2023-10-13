@@ -3,7 +3,7 @@ const { findUserByUsername, getUserData } = require('../../app/login/login.data-
 
 
 // Function to log in user
-async function authenticateUser (email, password) {
+async function handleLogin (email, password) {
     try {
         const userData = await findUserByUsername(email);
 
@@ -14,13 +14,12 @@ async function authenticateUser (email, password) {
         const isValid = await isPasswordValid(password, userData[0].hash);
 
         if (isValid) {
-            const user = await getUserData(email)
+            const user = await getUserData(email);
             return user;
         } else {
             return { error: "Invalid Password" };
         }
-    }
-    catch (error) {
+    } catch (error) {
         return { error: error.message };
     }
 }
@@ -30,6 +29,5 @@ async function isPasswordValid (password, hash) {
 }
 
 module.exports = {
-    authenticateUser,
-    isPasswordValid
+    handleLogin,
 }
