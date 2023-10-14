@@ -1,5 +1,3 @@
-const passport = require('passport');
-
 function googleAuthHelper (req, res) {
     // TODO
 }
