@@ -1,7 +1,7 @@
 const passport = require('passport');
-const helmet = require('helmet');
 const { Strategy } = require('passport-google-oauth20');
 const cookieSession = require('cookie-session');
+const app = require('../../app');
 
 const { googleAuthHelper, googleCallbackHelper, googleLogoutHelper, googleFailureHelper } = require('../../helpers/oauth/oauth.helper');
 
@@ -17,6 +17,34 @@ const AUTH_OPTIONS = {
     clientID: config.CLIENT_ID,
     clientSecret: config.CLIENT_SECRET
 }
+
+function verifyCallback (accessToken, refreshToken, profile, done) {
+    console.log("Google profile", profile);
+    done(null, profile);
+}
+
+passport.use(new Strategy(AUTH_OPTIONS, verifyCallback));
+
+passport.serializeUser((user, done) => {
+    done(null, user.id);
+});
+
+passport.deserializeUser((id, done) => {
+    done(null, id);
+});
+
+// Not sure it works from here
+
+app.use(cookieSession({
+    name: 'session',
+    maxAge: 24 * 60 * 60 * 1000, // One 24 hours day
+    keys: [config.COOKIE_KEY_1, config.COOKIE_KEY_2]
+}))
+
+app.use(passport.initialize());
+app.use(passport.session());
+
+// To here
 
 function googleAuth (req, res) {
     googleAuthHelper(req, res);
