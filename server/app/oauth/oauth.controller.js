@@ -1,17 +1,24 @@
-const {  } = require('../../helpers/oauth/oauth.helper');
+const { googleAuthHelper, googleCallbackHelper, googleLogoutHelper, googleFailureHelper } = require('../../helpers/oauth/oauth.helper');
 
 function googleAuth (req, res) {
-    // TODO
+    googleAuthHelper(req, res);
 }
 
 function googleCallback (req, res) {
-    // TODO
+    googleCallbackHelper(req, res);
 }
 
 function googleLogout (req, res) {
-    // TODO
+    googleLogoutHelper(req, res);
 }
 
 function googleFailure (req, res) {
-    // TODO
+    googleFailureHelper(req, res);
+}
+
+module.exports = {
+    googleAuth,
+    googleCallback,
+    googleLogout,
+    googleFailure
 }
