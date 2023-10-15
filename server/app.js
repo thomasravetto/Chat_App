@@ -8,7 +8,7 @@ const app = express();
 
 app.use(express.json());
 app.use(morgan('combined'));
-app.use(helmet())
+app.use(helmet());
 
 app.use('/v1', api);
 
