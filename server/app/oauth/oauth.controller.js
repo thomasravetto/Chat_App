@@ -1,7 +1,7 @@
 const passport = require('passport');
 const { Strategy } = require('passport-google-oauth20');
 const cookieSession = require('cookie-session');
-const app = require('../../app');
+const app = require('../../helpers/express_server/app');
 
 const { googleAuthHelper, googleCallbackHelper, googleLogoutHelper, googleFailureHelper } = require('../../helpers/oauth/oauth.helper');
 
