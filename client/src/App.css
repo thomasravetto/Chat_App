@@ -4,6 +4,8 @@
 
 /* Login and Register Form */
 
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;700&display=swap');
+
 
 * {
 	box-sizing: border-box;
@@ -50,8 +52,8 @@ a {
 
 button {
 	border-radius: 20px;
-	border: 1px solid #FF4B2B;
-	background-color: #FF4B2B;
+	border: 1px solid #279EFF;
+	background-color: #279EFF;
 	color: #FFFFFF;
 	font-size: 12px;
 	font-weight: bold;
@@ -59,6 +61,7 @@ button {
 	letter-spacing: 1px;
 	text-transform: uppercase;
 	transition: transform 80ms ease-in;
+	cursor: pointer;
 }
 
 button:active {
@@ -96,7 +99,7 @@ input {
 .container {
 	background-color: #fff;
 	border-radius: 10px;
-  	box-shadow: 0 14px 28px rgba(0,0,0,0.25), 
+  	box-shadow: 0 14px 28px rgba(0,0,0,0.25),
 			0 10px 10px rgba(0,0,0,0.22);
 	position: relative;
 	overflow: hidden;
@@ -110,6 +113,10 @@ input {
 	top: 0;
 	height: 100%;
 	transition: all 0.6s ease-in-out;
+}
+
+.input_form {
+	border-radius: 4px;
 }
 
 .sign-in-container {
@@ -164,9 +171,9 @@ input {
 }
 
 .overlay {
-	background: #FF416C;
-	background: -webkit-linear-gradient(to right, #FF4B2B, #FF416C);
-	background: linear-gradient(to right, #FF4B2B, #FF416C);
+	background: #279EFF;
+	background: -webkit-linear-gradient(to right, #7ac3ff, #008cff);
+	background: linear-gradient(to right, #6ebbfa, #0087f5);
 	background-repeat: no-repeat;
 	background-size: cover;
 	background-position: 0 0;
@@ -219,15 +226,39 @@ input {
 	margin: 20px 0;
 }
 
-.social-container a {
+/* .social-container a {
 	border: 1px solid #DDDDDD;
-	border-radius: 50%;
+	border-radius: 20px;
 	display: inline-flex;
+	padding: 12px 45px;
 	justify-content: center;
 	align-items: center;
 	margin: 0 5px;
 	height: 40px;
-	width: 40px;
+} */
+
+.google-btn {
+	border: 1px solid #DDDDDD;
+    border-radius: 22px;
+	height: 45px;
+	padding: 7px;
+    cursor: pointer;
+    cursor: hand;
+	display: flex;
+	transition: transform 80ms ease-in;
+}
+
+.google-btn:active {
+	transform: scale(0.95);
+}
+
+.btn-text {
+    float: left;
+    margin: 5px 14px 10px 11px;
+    color: #757575;
+    font-size: 14px;
+    letter-spacing: .2px;
+    font-family: 'Montserrat', sans-serif;
 }
 
 /* Login and Register Form */
