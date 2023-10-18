@@ -8,12 +8,12 @@ const { googleAuthHelper, googleCallbackHelper, googleLogoutHelper, googleFailu
 const config = {
     CLIENT_ID: process.env.CLIENT_ID,
     CLIENT_SECRET: process.env.CLIENT_SECRET,
-    COOKIE_KEY_1: process.env.CLIENT_KEY_1,
-    COOKIE_KEY_2: process.env.CLIENT_KEY_2,
+    COOKIE_KEY_1: process.env.COOKIE_KEY_1,
+    COOKIE_KEY_2: process.env.COOKIE_KEY_2,
 }
 
 const AUTH_OPTIONS = {
-    callbackURL: 'localhost:3500/v1/auth/google/callback',
+    callbackURL: 'https://localhost:3500/v1/auth/google/callback',
     clientID: config.CLIENT_ID,
     clientSecret: config.CLIENT_SECRET
 }
@@ -47,19 +47,19 @@ app.use(passport.session());
 // To here
 
 function googleAuth (req, res) {
-    googleAuthHelper(req, res);
+    googleAuthHelper(req, res, passport);
 }
 
 function googleCallback (req, res) {
-    googleCallbackHelper(req, res);
+    googleCallbackHelper(req, res, passport);
 }
 
 function googleLogout (req, res) {
-    googleLogoutHelper(req, res);
+    googleLogoutHelper(req, res, passport);
 }
 
 function googleFailure (req, res) {
-    googleFailureHelper(req, res);
+    googleFailureHelper(req, res, passport);
 }
 
 module.exports = {
