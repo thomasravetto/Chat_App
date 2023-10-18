@@ -1,3 +1,7 @@
+import { route } from '../../../../server/helpers/express_server/app';
+import GoogleLogo from '../../google_logo.png';
+import { useNavigate } from 'react-router-dom';
+
 function Login(props) {
     return (
         <div className='login_and_register_form'>
@@ -6,7 +10,7 @@ function Login(props) {
                     <h1>Create Account</h1>
                     <div className="social-container">
                         <a href="https://localhost:3500/v1/auth/google" className="google-btn">
-                            <img className="google-icon-svg" src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg"/>
+                            <img className="google-icon-svg" src={GoogleLogo}/>
                             <p className="btn-text"><b>Sign up with Google</b></p>
                         </a>
                     </div>
@@ -14,7 +18,7 @@ function Login(props) {
                     <input className='input_form' type="text" placeholder="Name" />
                     <input className='input_form' type="email" placeholder="Email" />
                     <input className='input_form' type="password" placeholder="Password" />
-                    <button>Sign Up</button>
+                    <button onClick={routeChange}>Sign Up</button>
                 </form>
             </div>
             <div className="form-container sign-in-container">
@@ -22,7 +26,7 @@ function Login(props) {
                     <h1>Sign in</h1>
                     <div className="social-container">
                         <a href="https://localhost:3500/v1/auth/google" className="google-btn">
-                            <img className="google-icon-svg" src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg"/>
+                            <img className="google-icon-svg" src={GoogleLogo}/>
                             <p className="btn-text"><b>Continue with Google</b></p>
                         </a>
                     </div>
@@ -30,7 +34,7 @@ function Login(props) {
                     <input className='input_form' type="email" placeholder="Email" />
                     <input className='input_form' type="password" placeholder="Password" />
                     <a href="#">Forgot your password?</a>
-                    <button>Sign In</button>
+                    <button onClick={routeChange}>Sign In</button>
                 </form>
             </div>
             <div className="overlay-container">

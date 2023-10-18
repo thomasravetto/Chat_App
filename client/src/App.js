@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import LoginAndRegister from './components/authentication/LoginAndRegister';
 import './App.css';
@@ -13,9 +14,16 @@ function App() {
 
   return (
     <div className="App">
-      <div className={`container ${isActive ? 'right-panel-active' : ''}`} id='container'>
-        <LoginAndRegister handleClick={handleClick}/>
-      </div>
+      <BrowserRouter>
+        <Routes>
+          <Route path='/authentication' element={
+            <div className={`container ${isActive ? 'right-panel-active' : ''}`} id='container'>
+                <LoginAndRegister handleClick={handleClick}/>
+            </div>
+          } />
+          <Route path='/' element={<div>Ciao</div>}/>
+        </Routes>
+      </BrowserRouter>
     </div>
   );
 }
