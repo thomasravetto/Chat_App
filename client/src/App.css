@@ -12,13 +12,15 @@
 }
 
 body {
-	background: #f6f5f7;
+	background-image: url('../public/abstract-blue-geometric-shapes-background/17545.jpg');
+	background-position: center;
+	background-size: cover;
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	flex-direction: column;
 	font-family: 'Montserrat', sans-serif;
-	height: 100vh;
+	height: 95vh;
 	margin: -20px 0 50px;
 }
 

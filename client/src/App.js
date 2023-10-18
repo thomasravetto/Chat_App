@@ -8,7 +8,7 @@ function App() {
 
   const [isActive, setIsActive] = useState(false);
 
-    const handleClick = (event) => {
+    const changePanel = (event) => {
         setIsActive(current => !current);
     }
 
@@ -18,7 +18,7 @@ function App() {
         <Routes>
           <Route path='/authentication' element={
             <div className={`container ${isActive ? 'right-panel-active' : ''}`} id='container'>
-                <LoginAndRegister handleClick={handleClick}/>
+                <LoginAndRegister changePanel={changePanel}/>
             </div>
           } />
           <Route path='/' element={<div>Ciao</div>}/>

@@ -8,7 +8,7 @@ async function handleLogin (email, password) {
         const userData = await findUserByUsername(email);
 
         if (userData.length === 0) {
-            return { error: 'User not found' };
+            return [{ error: 'Email or Password not valid' }];
         };
 
         const isValid = await isPasswordValid(password, userData[0].hash);
@@ -17,7 +17,7 @@ async function handleLogin (email, password) {
             const user = await getUserData(email);
             return user;
         } else {
-            return { error: "Invalid Password" };
+            return [{ error: 'Email or Password not valid' }];
         }
     } catch (error) {
         return { error: error.message };

@@ -4,13 +4,9 @@ const { handleRegister } = require('../../helpers/register/register.helper');
 
 async function registerUser (req, res) {
     try {
-        const { username, email, password, confirmation } = req.body;
+        const { username, email, password } = req.body;
 
-        if (!username || !email || !password || !confirmation) {
-            res.json({ error: "Invalid credentials" });
-            return;
-        }
-        if (password !== confirmation) {
+        if (!username || !email || !password) {
             res.json({ error: "Invalid credentials" });
             return;
         }

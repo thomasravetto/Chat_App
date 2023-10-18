@@ -11,8 +11,8 @@ async function loginUser (req, res) {
             }
             const user = await handleLogin(email, password);
 
-            res.json(user);
-    } catch {
+            res.json(user[0]);
+    } catch (error) {
         return { error: error.message };
     }
 }
