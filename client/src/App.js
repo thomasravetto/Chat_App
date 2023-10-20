@@ -22,6 +22,7 @@ function App() {
             </div>
           } />
           <Route path='/' element={<div>Ciao</div>}/>
+          <Route path='/auth/failure' element={<div>Failure</div>}/>
         </Routes>
       </BrowserRouter>
     </div>

@@ -1,6 +1,7 @@
 const passport = require('passport');
 const { Strategy } = require('passport-google-oauth20');
 const cookieSession = require('cookie-session');
+const session = require('express-session');
 const app = require('../../helpers/express_server/app');
 
 const { googleAuthHelper, googleCallbackHelper, googleLogoutHelper, googleFailureHelper } = require('../../helpers/oauth/oauth.helper');
@@ -8,8 +9,6 @@ const { googleAuthHelper, googleCallbackHelper, googleLogoutHelper, googleFailu
 const config = {
     CLIENT_ID: process.env.CLIENT_ID,
     CLIENT_SECRET: process.env.CLIENT_SECRET,
-    COOKIE_KEY_1: process.env.COOKIE_KEY_1,
-    COOKIE_KEY_2: process.env.COOKIE_KEY_2,
 }
 
 const AUTH_OPTIONS = {
@@ -19,8 +18,14 @@ const AUTH_OPTIONS = {
 }
 
 function verifyCallback (accessToken, refreshToken, profile, done) {
-    console.log("Google profile", profile);
-    done(null, profile);
+
+    const user = {
+        id: profile.id,
+        displayName: profile.displayName,
+        email: profile.emails[0].value,
+    }
+
+    done(null, user);
 }
 
 passport.use(new Strategy(AUTH_OPTIONS, verifyCallback));
@@ -35,12 +40,6 @@ passport.deserializeUser((id, done) => {
 
 // Not sure it works from here
 
-app.use(cookieSession({
-    name: 'session',
-    maxAge: 24 * 60 * 60 * 1000, // One 24 hours day
-    keys: [config.COOKIE_KEY_1, config.COOKIE_KEY_2]
-}))
-
 app.use(passport.initialize());
 app.use(passport.session());
 
@@ -51,6 +50,7 @@ function googleAuth (req, res) {
 }
 
 function googleCallback (req, res) {
+    console.log(req, req.query, req.user)
     googleCallbackHelper(req, res, passport);
 }
 

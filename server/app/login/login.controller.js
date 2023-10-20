@@ -11,7 +11,14 @@ async function loginUser (req, res) {
             }
             const user = await handleLogin(email, password);
 
-            res.json(user[0]);
+            if (user && user.length > 0) {
+                req.session.user = user[0].email
+
+                res.json(user[0]);
+            } else {
+                return res.status(400).json({error: 'Authentication failed'})
+            }
+
     } catch (error) {
         return { error: error.message };
     }

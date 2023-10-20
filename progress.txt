@@ -1,0 +1,2 @@
+Ora dovrebbe mandare giustamente nella home page, mi rimane solo da capire se i cookie funzionano correttamente
+e implementare un middleware che non mi faccia accedere alla homepage se non sono loggato.

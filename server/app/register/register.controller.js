@@ -13,7 +13,13 @@ async function registerUser (req, res) {
 
         const newUser = await handleRegister(username, email,  password);
 
-        res.json(newUser);
+        if (newUser && newUser.email) {
+            req.session.user = newUser.email
+
+            res.json(newUser);
+        } else {
+            res.status(400).json({error: 'Authentication failed'});
+        }
     } catch (error) {
         return { error: error.message };
     }
