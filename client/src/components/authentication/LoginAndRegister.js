@@ -9,6 +9,7 @@ function Login(props) {
 
     const navigate = useNavigate();
 
+
     const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -28,7 +29,7 @@ function Login(props) {
     function handleClick () {
         props.changePanel();
         setTimeout(() => {
-            setUsername('');
+        setUsername('');
         setEmail('');
         setPassword('');
         }, 250);
@@ -39,20 +40,23 @@ function Login(props) {
             method: 'post',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({
-                email: email,
-                password: password
-            })
-        });
+                    email: email,
+                    password: password
+                })
+            });
 
-        const data = await resp.json();
-        if (data.username) {
-            console.log(data);
-        } else if (data.error) {
-            console.log(data.error)
-        } else {
-            console.log(data)
+            const data = await resp.json();
+            if (data.username) {
+                props.loadUser(data, () => {
+                    navigate('/');
+                });
+                console.log('piero',data);
+            } else if (data.error) {
+                console.log(data.error)
+            } else {
+                console.log(data)
+            }
         }
-    }
 
     async function SubmitRegister () {
         const resp = await fetch(API_URL + '/register', {
@@ -66,7 +70,7 @@ function Login(props) {
         });
         const data = await resp.json();
         if (data.username) {
-            console.log(data);
+            console.log('piero',data);
         } else if (data.error) {
             console.log(data.error)
         } else {
