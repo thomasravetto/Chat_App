@@ -52,7 +52,7 @@ a {
 	margin: 10px 0;
 }
 
-.submit_button, .panel_button{
+button{
 	border-radius: 20px;
 	border: 1px solid #279EFF;
 	background-color: #279EFF;
@@ -66,15 +66,15 @@ a {
 	cursor: pointer;
 }
 
-.submit_button:active, .panel_button:active{
+button:active{
 	transform: scale(0.95);
 }
 
-.submit_button:focus, .panel_button:focus{
+button:focus{
 	outline: none;
 }
 
-.ghost {
+button.ghost {
 	background-color: transparent;
 	border-color: #FFFFFF;
 }

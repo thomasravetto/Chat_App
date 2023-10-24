@@ -27,7 +27,8 @@ function LoginAndRegister(props) {
         setPassword(event.target.value);
     }
 
-    function handleClick () {
+    function handleClick (event) {
+        event.preventDefault();
         props.changePanel();
         setTimeout(() => {
         setUsername('');
@@ -37,7 +38,9 @@ function LoginAndRegister(props) {
         }, 250);
     }
 
-    async function SubmitLogin () {
+    async function SubmitLogin (event) {
+        event.preventDefault();
+
         const resp = await fetch(API_URL + '/login', {
             method: 'post',
             headers: {'Content-Type': 'application/json'},
@@ -53,13 +56,18 @@ function LoginAndRegister(props) {
                     navigate('/');
                 });
             } else if (data.error) {
+                setUsername('');
+                setEmail('');
+                setPassword('');
                 setLoginError(data.error);
             } else {
                 console.error(data);
             }
         }
 
-    async function SubmitRegister () {
+    async function SubmitRegister (event) {
+        event.preventDefault();
+
         const resp = await fetch(API_URL + '/register', {
             method: 'post',
             headers: {'Content-Type': 'application/json'},
@@ -75,16 +83,13 @@ function LoginAndRegister(props) {
                 navigate('/');
             });
         } else if (data.error) {
+            setUsername('');
+            setEmail('');
+            setPassword('');
             setLoginError(data.error);
         } else {
             console.error(data);
         }
-    }
-
-    async function HandleGoogleOauthLogin () {
-        const response = await fetch('https://localhost:3500/v1/auth/google');
-        const data = await response.json();
-        console.log(data);
     }
 
     return (
@@ -93,10 +98,10 @@ function LoginAndRegister(props) {
                 <form action="#">
                     <h1>Create Account</h1>
                     <div className="social-container">
-                        <button onClick={HandleGoogleOauthLogin} className="google-btn">
+                        <a href="https://localhost:3500/v1/auth/google" className="google-btn">
                             <img className="google-icon-svg" src={GoogleLogo}/>
                             <p className="btn-text"><b>Sign up with Google</b></p>
-                        </button>
+                        </a>
                     </div>
                     <span>or use your email for registration</span>
                     <div className='input_container'>
