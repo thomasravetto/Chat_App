@@ -8,7 +8,12 @@ async function handleRegister (username, email, password) {
 
         const newUser = await registerUserIntoDatabase(username, email, hash);
 
-        return newUser;
+        if (newUser) {
+            return newUser
+        } else {
+            return [{ error: 'User already exists' }];
+        }
+
     } catch (error) {
         return { error: error.message };
     }
