@@ -37,7 +37,7 @@ function App() {
             </div>
           } />
           <Route path='/' element={
-          isAuthenticated ? <Home/>
+          isAuthenticated ? <Home username={username} email={email}/>
           : <Navigate replace to={'/authentication'}/>}/>
           <Route path='/auth/failure' element={<div>Failure</div>}/>
         </Routes>

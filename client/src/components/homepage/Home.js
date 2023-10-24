@@ -1,9 +1,9 @@
 import { useState } from 'react';
 
-function Home () {
+function Home (props) {
 
     return (
-        <div>Ciao</div>
+        <div>{props.username} {props.email}</div>
     )
 }
 

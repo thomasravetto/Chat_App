@@ -49,10 +49,10 @@ a {
 	color: #333;
 	font-size: 14px;
 	text-decoration: none;
-	margin: 15px 0;
+	margin: 10px 0;
 }
 
-button {
+.submit_button, .panel_button{
 	border-radius: 20px;
 	border: 1px solid #279EFF;
 	background-color: #279EFF;
@@ -66,15 +66,15 @@ button {
 	cursor: pointer;
 }
 
-button:active {
+.submit_button:active, .panel_button:active{
 	transform: scale(0.95);
 }
 
-button:focus {
+.submit_button:focus, .panel_button:focus{
 	outline: none;
 }
 
-button.ghost {
+.ghost {
 	background-color: transparent;
 	border-color: #FFFFFF;
 }
@@ -119,6 +119,10 @@ input {
 
 .input_form {
 	border-radius: 4px;
+}
+
+.input_container {
+	margin-bottom: 5px;
 }
 
 .sign-in-container {
@@ -250,6 +254,10 @@ input {
     cursor: hand;
 	display: flex;
 	transition: transform 80ms ease-in;
+	color: #333;
+	font-size: 14px;
+	text-decoration: none;
+	margin: 10px 0;
 }
 
 .google-btn:active {
@@ -263,6 +271,20 @@ input {
     font-size: 14px;
     letter-spacing: .2px;
     font-family: 'Montserrat', sans-serif;
+}
+
+.error_container {
+	color: rgb(223, 2, 2);
+	background-color: #ffe7e7;
+	border-radius: 10px;
+	margin-bottom: 10px;
+	padding: 5px 15px;
+	display: none;
+	transition: transform 2s ease-in-out;
+}
+
+.show_error {
+	display: block;
 }
 
 /* Login and Register Form */

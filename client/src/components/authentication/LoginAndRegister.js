@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 
 const API_URL = 'https://localhost:3500/v1';
 
-function Login(props) {
+function LoginAndRegister(props) {
 
     const navigate = useNavigate();
 
@@ -13,6 +13,7 @@ function Login(props) {
     const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [login_error, setLoginError] = useState('');
 
     function onUsernameChange (event) {
         setUsername(event.target.value);
@@ -32,6 +33,7 @@ function Login(props) {
         setUsername('');
         setEmail('');
         setPassword('');
+        setLoginError('');
         }, 250);
     }
 
@@ -50,11 +52,10 @@ function Login(props) {
                 props.loadUser(data, () => {
                     navigate('/');
                 });
-                console.log('piero',data);
             } else if (data.error) {
-                console.log(data.error)
+                setLoginError(data.error);
             } else {
-                console.log(data)
+                console.error(data);
             }
         }
 
@@ -70,12 +71,20 @@ function Login(props) {
         });
         const data = await resp.json();
         if (data.username) {
-            console.log('piero',data);
+            props.loadUser(data, () => {
+                navigate('/');
+            });
         } else if (data.error) {
-            console.log(data.error)
+            setLoginError(data.error);
         } else {
-            console.log(data)
+            console.error(data);
         }
+    }
+
+    async function HandleGoogleOauthLogin () {
+        const response = await fetch('https://localhost:3500/v1/auth/google');
+        const data = await response.json();
+        console.log(data);
     }
 
     return (
@@ -84,16 +93,19 @@ function Login(props) {
                 <form action="#">
                     <h1>Create Account</h1>
                     <div className="social-container">
-                        <a href="https://localhost:3500/v1/auth/google" className="google-btn">
+                        <button onClick={HandleGoogleOauthLogin} className="google-btn">
                             <img className="google-icon-svg" src={GoogleLogo}/>
                             <p className="btn-text"><b>Sign up with Google</b></p>
-                        </a>
+                        </button>
                     </div>
                     <span>or use your email for registration</span>
-                    <input onChange={onUsernameChange} className='input_form' type="text" placeholder="Username" value={username}/>
-                    <input onChange={onEmailChange} className='input_form' type="email" placeholder="Email" value={email} />
-                    <input onChange={onPasswordChange} className='input_form' type="password" placeholder="Password" value={password}/>
-                    <button onClick={SubmitRegister}>Sign Up</button>
+                    <div className='input_container'>
+                        <input onChange={onUsernameChange} className='input_form' type="text" placeholder="Username" value={username}/>
+                        <input onChange={onEmailChange} className='input_form' type="email" placeholder="Email" value={email} />
+                        <input onChange={onPasswordChange} className='input_form' type="password" placeholder="Password" value={password}/>
+                    </div>
+                    <div className={`error_container ${login_error.length > 0 ? 'show_error' : ''}`}>{login_error}</div>
+                    <button className='submit_button' onClick={SubmitRegister}>Sign Up</button>
                 </form>
             </div>
             <div className="form-container sign-in-container">
@@ -106,10 +118,13 @@ function Login(props) {
                         </a>
                     </div>
                     <span>or use your account</span>
-                    <input onChange={onEmailChange} className='input_form' type="email" placeholder="Email" value={email}/>
-                    <input onChange={onPasswordChange} className='input_form' type="password" placeholder="Password" value={password}/>
+                    <div className='input_container'>
+                        <input onChange={onEmailChange} className='input_form' type="email" placeholder="Email" value={email}/>
+                        <input onChange={onPasswordChange} className='input_form' type="password" placeholder="Password" value={password}/>
+                    </div>
                     <a href="#">Forgot your password?</a>
-                    <button onClick={SubmitLogin}>Sign In</button>
+                    <div className={`error_container ${login_error.length > 0 ? 'show_error' : ''}`}>{login_error}</div>
+                    <button className='submit_button' onClick={SubmitLogin}>Sign In</button>
                 </form>
             </div>
             <div className="overlay-container">
@@ -117,12 +132,12 @@ function Login(props) {
                     <div className="overlay-panel overlay-left">
                         <h1>Welcome Back!</h1>
                         <p>To keep connected with us please login with your personal info</p>
-                        <button className="ghost" id="signIn" onClick={handleClick}>Sign In</button>
+                        <button className="panel_button ghost" id="signIn" onClick={handleClick}>Sign In</button>
                     </div>
                     <div className="overlay-panel overlay-right">
                         <h1>Hello, Friend!</h1>
                         <p>Enter your personal details and start your journey with us</p>
-                        <button className="ghost" id="signUp" onClick={handleClick}>Sign Up</button>
+                        <button className="panel_button ghost" id="signUp" onClick={handleClick}>Sign Up</button>
                     </div>
                 </div>
             </div>
@@ -130,4 +145,4 @@ function Login(props) {
      )
 }
 
-export default Login;
+export default LoginAndRegister;
