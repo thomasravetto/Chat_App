@@ -14,9 +14,6 @@ function googleCallbackHelper (req, res, passport) {
             console.log(err);
             return res.redirect('/auth/failure');
         }
-
-        console.log('User:');
-        res.redirect('/');
     });
 }
 
