@@ -21,7 +21,7 @@ async function registerUserIntoDatabase (username, email, hash) {
                     });
 
                 // await trx.commit();
-                return user[0];
+                return user;
 
             } catch (error) {
                 throw error;

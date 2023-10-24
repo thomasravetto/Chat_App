@@ -18,7 +18,7 @@ async function registerUser (req, res) {
 
             res.json(newUser);
         } else {
-            res.status(400).json({error: 'Authentication failed'});
+            res.status(400).json({error: 'User already exists'});
         }
     } catch (error) {
         return { error: error.message };
