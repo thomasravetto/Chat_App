@@ -7,7 +7,7 @@ async function registerUser (req, res) {
         const { username, email, password } = req.body;
 
         if (!username || !email || !password) {
-            res.json({ error: "Invalid credentials" });
+            res.json({ error: "Missing credentials" });
             return;
         }
 

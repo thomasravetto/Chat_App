@@ -7,7 +7,7 @@ async function loginUser (req, res) {
     try {
         const { email, password } = req.body;
             if (!email || !password) {
-                res.json({ error: "Invalid credentials" })
+                res.json({ error: "Missing credentials" })
             }
             const user = await handleLogin(email, password);
 
