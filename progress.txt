@@ -1,6 +1,0 @@
-Ho implementato il routing di react che mi permette di non accedere all'index se non sono loggato. C'è un bug che devo
-ancora capire. Quando entro la prima volta e carico il sito, a volte inserisco i dati e il sistema non mi logga, la
-seconda volta si. Pensavo che il problema fosse dovuto al fatto che lo stato viene aggiornato dopo che è stato letto,
-ma il fatto è che se la prima volta loggo con 'thomas' e la seconda con 'sara' lo stato che viene printato è sara.
-Devo aggiornare l'index per fare in modo che lo stato venga scritto li in modo da capire bene come viene letto
-all'interno dell'app
