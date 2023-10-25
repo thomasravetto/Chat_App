@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { BrowserRouter, Routes, Route, Navigate, useNavigate } from "react-router-dom";
 
 import LoginAndRegister from './components/authentication/LoginAndRegister';
@@ -26,6 +26,39 @@ function App() {
       callback();
     }
   }
+
+  async function sessionChecker () {
+    try {
+      const resp = await fetch(API_URL + '/check_session');
+
+      if (resp.ok) {
+        const data = await resp.json();
+        return data;
+      } else {
+        console.error('Error checking session:', resp.status);
+        return { isAuthenticated: false };
+      }
+
+    } catch (error) {
+      console.error('Error checking session:', error);
+      return { isAuthenticated: false };
+    }
+  }
+
+  async function handleSessionChecker () {
+    const sessionStatus = await sessionChecker();
+    if (sessionStatus.isAuthenticated) {
+      console.log(sessionStatus);
+      setAuthenticated(true);
+      setUsername(sessionStatus.username);
+      setEmail(sessionStatus.email);
+    }
+    console.log(isAuthenticated, username, email);
+  }
+
+  useEffect(() => {
+    handleSessionChecker();
+  }, [])
 
   return (
     <div className="App">
