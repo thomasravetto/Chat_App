@@ -12,7 +12,8 @@ async function loginUser (req, res) {
             const user = await handleLogin(email, password);
 
             if (user && user.length > 0) {
-                req.session.user = user[0].email
+                req.session.username = user[0].username;
+                req.session.email = user[0].email;
 
                 res.json(user[0]);
             } else {
