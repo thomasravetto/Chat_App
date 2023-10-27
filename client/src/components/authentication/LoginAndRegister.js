@@ -41,8 +41,12 @@ function LoginAndRegister(props) {
     async function SubmitLogin (event) {
         event.preventDefault();
 
+        if (!validateEmail(email)) {
+            return;
+        }
+
         const resp = await fetch(API_URL + '/login', {
-            method: 'post',
+            method: 'POST',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({
                     email: email,
@@ -68,8 +72,12 @@ function LoginAndRegister(props) {
     async function SubmitRegister (event) {
         event.preventDefault();
 
+        if (!validateEmail(email)) {
+            return;
+        }
+
         const resp = await fetch(API_URL + '/register', {
-            method: 'post',
+            method: 'POST',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({
                 username: username,
@@ -89,6 +97,19 @@ function LoginAndRegister(props) {
             setLoginError(data.error);
         } else {
             console.error(data);
+        }
+    }
+
+    function validateEmail (email) {
+        const emailPattern = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+        const isEmailValid = emailPattern.test(email);
+
+        if (isEmailValid) {
+            setLoginError('');
+            return true;
+        } else {
+            setLoginError('The Email format is invalid');
+            return false;
         }
     }
 
