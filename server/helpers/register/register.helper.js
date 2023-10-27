@@ -8,15 +8,22 @@ async function handleRegister (username, email, password) {
 
         const newUser = await registerUserIntoDatabase(username, email, hash);
 
-        if (newUser) {
-            return newUser
+        if (newUser && newUser[0] && newUser[0].email) {
+            return newUser[0];
         } else {
-            return [{ error: 'User already exists' }];
+            throw new Error('Registration failed');
         }
 
     } catch (error) {
-        return { error: error.message };
+        return error;
     }
+}
+
+function validateEmail (email) {
+    const emailPattern = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+    const isEmailValid = emailPattern.test(email);
+
+    return isEmailValid;
 }
 
 async function hashPassword (password) {
@@ -25,4 +32,5 @@ async function hashPassword (password) {
 
 module.exports = {
     handleRegister,
+    validateEmail
 }
