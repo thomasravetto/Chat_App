@@ -4,6 +4,7 @@ import { BrowserRouter, Routes, Route, Navigate, useNavigate } from "react-route
 import LoginAndRegister from './components/authentication/LoginAndRegister';
 import Home from './components/homepage/Home';
 import './App.css';
+import Loader from './components/loader/Loader';
 
 function App() {
 
@@ -13,6 +14,7 @@ function App() {
   const [isAuthenticated, setAuthenticated] = useState(false);
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
+  const [sessionChecked, setSessionChecked] = useState(false);
 
   const changePanel = (event) => {
         setIsActive(current => !current);
@@ -45,20 +47,20 @@ function App() {
     }
   }
 
-  async function handleSessionChecker () {
-    const sessionStatus = await sessionChecker();
-    if (sessionStatus.isAuthenticated) {
-      console.log(sessionStatus);
-      setAuthenticated(true);
-      setUsername(sessionStatus.username);
-      setEmail(sessionStatus.email);
-    }
-    console.log(isAuthenticated, username, email);
-  }
-
   useEffect(() => {
+    async function handleSessionChecker () {
+      const sessionStatus = await sessionChecker();
+      if (sessionStatus.isAuthenticated) {
+        setAuthenticated(true);
+        setUsername(sessionStatus.username);
+        setEmail(sessionStatus.email);
+      }
+      setSessionChecked(true);
+    }
+
     handleSessionChecker();
   }, [])
+
 
   return (
     <div className="App">
@@ -70,8 +72,12 @@ function App() {
             </div>
           } />
           <Route path='/' element={
-          isAuthenticated ? <Home username={username} email={email}/>
-          : <Navigate replace to={'/authentication'}/>}/>
+            !sessionChecked ?
+              <Loader/> :
+              isAuthenticated ?
+                <Home username={username} email={email}/> :
+                <Navigate replace to={'/authentication'}/>
+          }/>
           <Route path='/auth/failure' element={<div>Failure</div>}/>
         </Routes>
       </BrowserRouter>
