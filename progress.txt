@@ -1,2 +1,2 @@
-I cookie dovrebbero essere a posto, devo solo capire perchè non funge, credo sia perchè la funzione che riceve i cookie
-è asincrona
+togliere username e mail da session e mettere id. sia in login che oauth
+forgot your password?
