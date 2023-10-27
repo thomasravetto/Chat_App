@@ -1,6 +1,6 @@
 const db = require('../../helpers/db_connection/db');
 
-async function findUserByUsername (email) {
+async function findUserByEmail (email) {
     try {
         const user = await db('login').where({
             email: email
@@ -22,12 +22,12 @@ async function getUserData (email) {
         return user;
     }
     catch (error) {
-        return error;
+        return { error: error.message };
     }
 }
 
 module.exports = {
-    findUserByUsername,
+    findUserByEmail,
     getUserData,
 }
 
