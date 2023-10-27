@@ -5,6 +5,7 @@ const session = require('express-session');
 const app = require('../../helpers/express_server/app');
 
 const { googleAuthHelper, googleCallbackHelper, googleLogoutHelper, googleFailureHelper } = require('../../helpers/oauth/oauth.helper');
+const {registerGoogleUserIntoDatabase} = require('./oauth.data-access');
 
 const config = {
     CLIENT_ID: process.env.CLIENT_ID,
@@ -18,24 +19,24 @@ const AUTH_OPTIONS = {
 }
 
 function verifyCallback (accessToken, refreshToken, profile, done) {
+    const username = profile._json.name;
+    const email = profile._json.email;
 
-    const user = {
-        id: profile.id,
-        displayName: profile.displayName,
-        email: profile.emails[0].value,
-    }
+    const user = {username: username, email: email};
 
-    done(null, user);
+    registerGoogleUserIntoDatabase(username, email, done);
 }
 
 passport.use(new Strategy(AUTH_OPTIONS, verifyCallback));
 
 passport.serializeUser((user, done) => {
-    done(null, user.id);
+    const username = user.username;
+    const email = user.email;
+    done(null, { username: username, email: email});
 });
 
-passport.deserializeUser((id, done) => {
-    done(null, id);
+passport.deserializeUser((user, done) => {
+    done(null, user);
 });
 
 // Not sure it works from here
@@ -50,7 +51,6 @@ function googleAuth (req, res) {
 }
 
 function googleCallback (req, res) {
-    console.log(req, req.query, req.user)
     googleCallbackHelper(req, res, passport);
 }
 
