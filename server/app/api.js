@@ -4,7 +4,7 @@ const loginRouter = require('./login/login.api');
 const registerRouter = require('./register/register.api');
 const oauthRouter = require('./oauth/oauth.api');
 
-const sessionChecker = require('../helpers/session/session_checker.helper');
+const { sessionChecker } = require('../helpers/session/session_checker.helper');
 
 const api = express.Router();
 
