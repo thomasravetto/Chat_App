@@ -1,9 +1,16 @@
 const db = require('../../helpers/db_connection/db');
 
+const { findUserByEmail } = require('../login/login.data-access');
+
 async function registerUserIntoDatabase (username, email, hash) {
     try {
+        const userAlreadyExists = await findUserByEmail(email);
+
+        if (userAlreadyExists.length > 0) {
+            throw new Error('User already exists');
+        }
+
         return db.transaction(async trx => {
-            try {
                 const registerEmail = await trx
                     .insert({
                         email:email,
@@ -22,13 +29,9 @@ async function registerUserIntoDatabase (username, email, hash) {
 
                 // await trx.commit();
                 return user;
-
-            } catch (error) {
-                throw error;
-            }
         });
     } catch (error) {
-        return { error: error.message };
+        return error;
     }
 }
 
