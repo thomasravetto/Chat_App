@@ -321,3 +321,24 @@ input {
 
 
 /* Loader */
+
+/* NavBar */
+
+.navbar_container {
+	height: 7rem;
+	width: 100%;
+	position: absolute;
+	left: 0;
+	top: 0;
+	background-color: rgb(214, 236, 255, 0.7);
+
+}
+
+.logo_image {
+	position: absolute;
+	top: 10px;
+	right: 40px;
+	height: 6rem;
+}
+
+/* NavBar */

@@ -11,7 +11,7 @@ function App() {
   const API_URL = 'https://localhost:3500/v1';
 
   const [isActive, setIsActive] = useState(false);
-  const [isAuthenticated, setAuthenticated] = useState(false);
+  const [isAuthenticated, setAuthenticated] = useState(true);  // CHANGE BACK TO FALSE
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [sessionChecked, setSessionChecked] = useState(false);
