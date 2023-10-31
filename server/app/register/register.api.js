@@ -4,7 +4,7 @@ const registerRouter = express.Router();
 
 const { registerUser } = require('./register.controller');
 
-// handle user registration
+// handle user Registration
 registerRouter.post('/', registerUser);
 
 module.exports = registerRouter;
