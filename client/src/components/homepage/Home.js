@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import appLogo from '../../logo_chat_app.png';
+import NavBar from './NavBar';
 
 function Home (props) {
 
@@ -7,9 +7,7 @@ function Home (props) {
     const [email, setEmail] = useState(props.email);
 
     return (
-        <div className='navbar_container'>
-            <img className='logo_image' src={appLogo} alt='Logo'></img>
-        </div>
+        <NavBar username={username}/>
     )
 }
 
