@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import NavBar from './NavBar';
+import NavBar from '../navbar/NavBar';
 
 function Home (props) {
 
