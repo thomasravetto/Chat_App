@@ -343,12 +343,59 @@ input {
 
 .search_user_input {
 	position: absolute;
-	left: 10rem;
-	width: 10rem;
-	height: 2rem;
+	top: 3vh;
+	left: 10vh;
+	width: 20vh;
+	height: 2vh;
 	border: 1px solid rgb(205, 205, 205);
 	border-radius: 5px;
 	background-color: white;
+	margin: 0;
 }
+
+
+/* SearchBox */
+
+.searchbox_container {
+	position: absolute;
+	left: 10vh;
+	top: 6vh;
+	height: auto;
+	width: 20vh;
+	border-radius: 5px;
+}
+
+.user {
+	border-bottom: 1px solid rgba(76, 170, 252, 0.9);
+	margin: 0px;
+	padding: 10px 0px;
+	border-radius: 5px;
+	background-color: rgb(214, 236, 255, 0.9);
+	transition: transform 80ms ease-in;
+	display: block;
+}
+
+.user:hover {
+	background-color: rgba(197, 228, 255, 0.9);
+}
+
+.user:active {
+	background-color: rgba(139, 201, 255, 0.9);
+	transform: scale(0.96);
+}
+
+.user_not_found {
+	color: rgb(173, 0, 0);
+	border-bottom: 1px solid rgba(76, 170, 252, 0.9);
+	margin: 0px;
+	padding: 10px 0px;
+	border-radius: 5px;
+	background-color: rgb(214, 236, 255, 0.9);
+	transition: transform 80ms ease-in;
+	display: block;
+}
+
+/* SearchBox */
+
 
 /* NavBar */
