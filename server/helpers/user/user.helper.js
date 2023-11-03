@@ -1,4 +1,4 @@
-const { findUserInDatabase } = require('../../app/user/user.data-access');
+const { findUserInDatabase, getUserDataFromDatabase } = require('../../app/user/user.data-access');
 
 async function findUserHelper (username) {
     const usersData = await findUserInDatabase(username);
@@ -10,6 +10,17 @@ async function findUserHelper (username) {
     }
 }
 
+async function getUserInfoHelper (username) {
+    const userData = await getUserDataFromDatabase(username);
+
+    if (userData) {
+        return userData[0];
+    } else {
+        return {error: 'No user was found'};
+    }
+}
+
 module.exports = {
     findUserHelper,
+    getUserInfoHelper
 }
