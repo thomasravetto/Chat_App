@@ -5,6 +5,7 @@ import LoginAndRegister from './components/authentication/LoginAndRegister';
 import Home from './components/homepage/Home';
 import './App.css';
 import Loader from './components/loader/Loader';
+import UserProfile from './components/user_profile/UserProfile';
 
 function App() {
 
@@ -78,6 +79,7 @@ function App() {
                 <Home username={username} email={email}/> :
                 <Navigate replace to={'/authentication'}/>
           }/>
+          <Route path='/profile' element={<UserProfile/>}/>
           <Route path='/auth/failure' element={<div>Failure</div>}/>
         </Routes>
       </BrowserRouter>

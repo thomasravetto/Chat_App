@@ -385,7 +385,7 @@ input {
 }
 
 .user_not_found {
-	color: rgb(173, 0, 0);
+	color: rgb(217, 0, 0);
 	border-bottom: 1px solid rgba(76, 170, 252, 0.9);
 	margin: 0px;
 	padding: 10px 0px;
@@ -399,3 +399,31 @@ input {
 
 
 /* NavBar */
+
+/* Profile Page */
+
+.profile_page {
+	width: 100rem;
+	height: 50rem;
+	background-color: rgb(230, 230, 230);
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	align-items: flex-start;
+	padding: 2rem;
+	border-radius: 10px;
+}
+
+.user_name_image {
+	width: 200px; /* Set the desired width for the square */
+	height: 200px; /* Set the same height to make it a square */
+	background-color: rgb(255, 183, 0);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-size: 6em;
+	font-weight: 500;
+	border-radius: 50%;
+  }
+
+/* Profile Page */
