@@ -1,4 +1,4 @@
-const { findUserInDatabase, getUserDataFromDatabase } = require('../../app/user/user.data-access');
+const { findUserInDatabase, getUserDataFromDatabase, getFriendshipData } = require('../../app/user/user.data-access');
 
 async function findUserHelper (username) {
     const usersData = await findUserInDatabase(username);
@@ -16,11 +16,22 @@ async function getUserInfoHelper (username) {
     if (userData) {
         return userData[0];
     } else {
-        return {error: 'No user was found'};
+        return { error: 'No user was found' };
+    }
+}
+
+async function checkFriendshipHelper (viewerUserId, profileUserId) {
+    const friendshipData = await getFriendshipData(viewerUserId, profileUserId);
+
+    if (friendshipData.length !== 0) {
+        return friendshipData[0];
+    } else {
+        return { error: 'No friendship was found in db' };
     }
 }
 
 module.exports = {
     findUserHelper,
-    getUserInfoHelper
+    getUserInfoHelper,
+    checkFriendshipHelper
 }
