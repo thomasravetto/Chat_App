@@ -344,8 +344,8 @@ input {
 .search_user_input {
 	position: absolute;
 	top: 3vh;
-	left: 10vh;
-	width: 20vh;
+	left: 10vw;
+	width: 15vw;
 	height: 2vh;
 	border: 1px solid rgb(205, 205, 205);
 	border-radius: 5px;
@@ -358,10 +358,10 @@ input {
 
 .searchbox_container {
 	position: absolute;
-	left: 10vh;
+	left: 10vw;
 	top: 6vh;
 	height: auto;
-	width: 20vh;
+	width: 15vw;
 	border-radius: 5px;
 }
 
@@ -403,8 +403,8 @@ input {
 /* Profile Page */
 
 .profile_page {
-	width: 100rem;
-	height: 50rem;
+	width: 80vw;
+	height: 60vh;
 	background-color: rgb(230, 230, 230);
 	display: flex;
 	flex-direction: column;
@@ -415,13 +415,13 @@ input {
 }
 
 .user_name_image {
-	width: 200px; /* Set the desired width for the square */
-	height: 200px; /* Set the same height to make it a square */
+	width: 20vh; /* Set the desired width for the square */
+	height: 20vh; /* Set the same height to make it a square */
 	background-color: rgb(255, 183, 0);
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	font-size: 6em;
+	font-size: 10vh;
 	font-weight: 500;
 	border-radius: 50%;
   }

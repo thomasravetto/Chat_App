@@ -7,7 +7,7 @@ function UserProfile (props) {
 
     const [isFriend, setIsFriend] = useState(false);
     const [isChatOpen, setIsChatOpen] = useState(false);
-    const [joined, setJoined] = useState('ogggi');
+    const [joined, setJoined] = useState('');
     const location = useLocation();
     const params = new URLSearchParams(location.search);
     const username = params.get('username');
