@@ -1,2 +1,1 @@
-togliere username e mail da session e mettere id. sia in login che oauth
-forgot your password?
+Aggiunta funzione nell'api per controllare le amicizie
