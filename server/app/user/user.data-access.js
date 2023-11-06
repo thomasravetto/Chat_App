@@ -35,8 +35,38 @@ async function getFriendshipData (viewerUserId, profileUserId) {
     }
 }
 
+async function sendFriendshipRequestInDatabase (senderUserId, receiverUserId) {
+    const trx = await db.transaction();
+
+    if (senderUserId === receiverUserId) {
+        return { error: 'Invalid request'};
+    }
+    try {
+        const friendshipAlreadyExists = await getFriendshipData(senderUserId, receiverUserId);
+
+        if (friendshipAlreadyExists.length === 0) {
+            const friendshipRequest = await trx('friendships')
+            .insert({
+                senderid: senderUserId,
+                receiverid: receiverUserId,
+                pending: true,
+                accepted: false
+            })
+            .returning('*');
+
+            await trx.commit();
+            return friendshipRequest;
+        } else {
+            return { error: 'Friendship already exists in database'}
+        }
+    } catch (error) {
+        return { error };
+    }
+}
+
 module.exports = {
     findUserInDatabase,
     getUserDataFromDatabase,
-    getFriendshipData
+    getFriendshipData,
+    sendFriendshipRequestInDatabase
 }

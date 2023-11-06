@@ -1,6 +1,6 @@
 const express = require('express');
 
-const { findUserHelper, getUserInfoHelper, checkFriendshipHelper } = require('../../helpers/user/user.helper');
+const { findUserHelper, getUserInfoHelper, checkFriendshipHelper, sendFriendshipRequestHelper } = require('../../helpers/user/user.helper');
 
 async function findUsersByUsername (req, res) {
     const { username } = req.body;
@@ -45,12 +45,19 @@ async function checkFriendship (req, res) {
 
         res.json(friendshipData);
     } catch (error) {
-        return { error: error.message };
+        res.status(400).json({error: error.message});
     }
 }
 
 async function sendFriendshipRequest (req, res) {
+    const { senderUserId, receiverUserId } = req.body;
+    try {
+        const friendshipRequest = await sendFriendshipRequestHelper(senderUserId, receiverUserId);
 
+        res.json(friendshipRequest);
+    } catch (error) {
+        res.status(400).json({error: error.message});
+    }
 }
 
 module.exports = {
