@@ -22,17 +22,18 @@ function verifyCallback (accessToken, refreshToken, profile, done) {
     const username = profile._json.name;
     const email = profile._json.email;
 
-    const user = {username: username, email: email};
+    const { id } = registerGoogleUserIntoDatabase(username, email, done);
 
-    registerGoogleUserIntoDatabase(username, email, done);
+    const user = {userid: id, username: username, email: email};
 }
 
 passport.use(new Strategy(AUTH_OPTIONS, verifyCallback));
 
 passport.serializeUser((user, done) => {
+    const userid = user.userid;
     const username = user.username;
     const email = user.email;
-    done(null, { username: username, email: email});
+    done(null, { userid:userid, username: username, email: email});
 });
 
 passport.deserializeUser((user, done) => {

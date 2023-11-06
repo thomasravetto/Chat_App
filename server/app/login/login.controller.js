@@ -17,8 +17,10 @@ async function loginUser (req, res) {
             }
 
             const user = await handleLogin(email, password);
+            console.log(user);
 
             if (user && user.email) {
+                req.session.userid = user.id;
                 req.session.username = user.username;
                 req.session.email = user.email;
 

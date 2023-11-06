@@ -10,9 +10,9 @@ async function findUserInDatabase (username) {
     }
 }
 
-async function getUserDataFromDatabase (username) {
+async function getUserDataFromDatabase (id) {
     try {
-        const userData = await db('users').where('username', `${username}`);
+        const userData = await db('users').where('id', `${id}`);
 
         return userData;
     } catch (error) {

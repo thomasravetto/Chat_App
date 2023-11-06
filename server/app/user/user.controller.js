@@ -22,10 +22,10 @@ async function findUsersByUsername (req, res) {
 }
 
 async function getUserInfo (req, res) {
-    const {username} = req.body;
+    const { id } = req.body;
 
     try {
-        const userData = await getUserInfoHelper(username);
+        const userData = await getUserInfoHelper(id);
 
         if (userData) {
             res.status(200).json(userData);
