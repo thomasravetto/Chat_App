@@ -1,6 +1,7 @@
 function sessionChecker (req, res) {
     if ((req.session.userid && req.session.username && req.session.email) || (req.session.passport && req.session.passport.user)) {
-        console.log("User found!");
+
+        console.log('session', req.session || req.session.passport.user);
 
         const id = req.session.userid || req.session.passport.user.userid;
         const username = req.session.username || req.session.passport.user.username;
@@ -8,7 +9,6 @@ function sessionChecker (req, res) {
 
         res.json({ isAuthenticated: true, id:id, username: username, email: email });
     } else {
-        console.log("User Not found");
         res.json({ isAuthenticated: false });
     }
 }
