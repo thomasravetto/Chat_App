@@ -10,8 +10,8 @@ async function findUserHelper (username) {
     }
 }
 
-async function getUserInfoHelper (username) {
-    const userData = await getUserDataFromDatabase(username);
+async function getUserInfoHelper (id) {
+    const userData = await getUserDataFromDatabase(id);
 
     if (userData) {
         return userData[0];
