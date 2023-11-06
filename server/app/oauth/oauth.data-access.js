@@ -7,11 +7,10 @@ async function registerGoogleUserIntoDatabase (username, email, done) {
     try {
         const existingUser = await getUserData(email);
 
-        console.log(existingUser, email)
-
         if (existingUser.length > 0) {
             await trx.commit();
-            return done(null, existingUser[0]);
+            console.log(existingUser);
+            return existingUser[0];
         } else {
                 const user = await trx('users')
                 .insert({
@@ -21,14 +20,13 @@ async function registerGoogleUserIntoDatabase (username, email, done) {
                 })
                 .returning('*');
 
-            console.log('google user', user);
-
             await trx.commit();
-            return done(null, user[0]);
+            console.log(user)
+            return user[0];
         }
     } catch (error) {
         await trx.rollback();
-        return done(error);
+        return error;
     }
 }
 

@@ -17,23 +17,26 @@ const AUTH_OPTIONS = {
     clientID: config.CLIENT_ID,
     clientSecret: config.CLIENT_SECRET
 }
-
-function verifyCallback (accessToken, refreshToken, profile, done) {
+async function verifyCallback (accessToken, refreshToken, profile, done) {
     const username = profile._json.name;
     const email = profile._json.email;
 
-    const { id } = registerGoogleUserIntoDatabase(username, email, done);
+    const user = await registerGoogleUserIntoDatabase(username, email, done);
 
-    const user = {userid: id, username: username, email: email};
+    if (user && user.id) {
+        done(null, user);
+    } else {
+        done(new Error("User object is missing 'id'"));
+    }
 }
 
 passport.use(new Strategy(AUTH_OPTIONS, verifyCallback));
 
 passport.serializeUser((user, done) => {
-    const userid = user.userid;
+    const userid = user.id;
     const username = user.username;
     const email = user.email;
-    done(null, { userid:userid, username: username, email: email});
+    done(null, { userid: userid, username: username, email: email});
 });
 
 passport.deserializeUser((user, done) => {
