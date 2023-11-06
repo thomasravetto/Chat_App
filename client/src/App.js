@@ -12,7 +12,8 @@ function App() {
   const API_URL = 'https://localhost:3500/v1';
 
   const [isActive, setIsActive] = useState(false);
-  const [isAuthenticated, setAuthenticated] = useState(true);  // CHANGE BACK TO FALSE
+  const [isAuthenticated, setAuthenticated] = useState(false);  // CHANGE BACK TO FALSE
+  const [userId, setId] = useState();
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [sessionChecked, setSessionChecked] = useState(false);
@@ -22,6 +23,7 @@ function App() {
     };
 
   function loadUser (user, callback) {
+    setId(user.id);
     setUsername(user.username)
     setEmail(user.email)
     setAuthenticated(true);
@@ -53,6 +55,7 @@ function App() {
       const sessionStatus = await sessionChecker();
       if (sessionStatus.isAuthenticated) {
         setAuthenticated(true);
+        setId(sessionStatus.id);
         setUsername(sessionStatus.username);
         setEmail(sessionStatus.email);
       }
@@ -79,7 +82,7 @@ function App() {
                 <Home username={username} email={email}/> :
                 <Navigate replace to={'/authentication'}/>
           }/>
-          <Route path='/profile' element={<UserProfile/>}/>
+          <Route path='/profile' element={<UserProfile id={userId}/>}/>
           <Route path='/auth/failure' element={<div>Failure</div>}/>
         </Routes>
       </BrowserRouter>

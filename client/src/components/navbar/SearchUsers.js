@@ -4,7 +4,7 @@ function SearchUsers (props) {
             {props.foundUsers &&
                 (Array.isArray(props.foundUsers) && props.foundUsers.length > 0
                     ? props.foundUsers.map((user) => (
-                        <a className="user" href={`/profile?username=${user.username}`} key={user.id}>{user.username}</a>
+                        <a className="user" href={`/profile?id=${user.id}`} key={user.id}>{user.username}</a>
                     ))
                     : <p className="user_not_found">No users were found</p>
                 )

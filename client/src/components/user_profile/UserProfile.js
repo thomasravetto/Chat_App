@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useLocation, useParams } from "react-router-dom";
 
 const API_URL = 'https://localhost:3500/v1';
@@ -7,32 +7,57 @@ function UserProfile (props) {
 
     const [isFriend, setIsFriend] = useState(false);
     const [isChatOpen, setIsChatOpen] = useState(false);
-    const [joined, setJoined] = useState('');
+    const [profileJoined, setJoined] = useState('');
+    const [profileUsername, setUsername] = useState('');
+
     const location = useLocation();
     const params = new URLSearchParams(location.search);
-    const username = params.get('username');
+    const profileId = Number(params.get('id'));
 
-    async function GetUserData (username) {
+    async function GetUserData (id) {
         const resp = await fetch(API_URL + '/user/get_user_data', {
             method: 'post',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({
-                username: username,
+                id: id,
             }),
         });
 
-        const { joined } = await resp.json();
+        const { username, joined } = await resp.json();
+        setUsername(username);
         setJoined(joined);
         return;
     }
 
-    GetUserData(username);
+    async function checkUserFriendship (viewerUserId, profileUserId) {
+        const resp = await fetch(API_URL + '/user/check_friendship', {
+            method: 'post',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({
+                viewerUserId: viewerUserId,
+                profileUserId: profileUserId,
+            }),
+        });
+
+        const data = await resp.json();
+
+        if (!data.pending && data.accepted) {
+            setIsFriend(true);
+        }
+    }
+
+    const viewerId = props.id;
+
+    useEffect(() => {
+        GetUserData(profileId);
+        checkUserFriendship(viewerId, profileId);
+    }, [profileId, viewerId]);
 
     return (
         <div className="profile_page">
-            <div className="user_name_image">{username[0].toUpperCase()}</div>
-            <h2>Username: {username}</h2>
-            <p>Joined on: {joined}</p>
+            <div className="user_name_image">{profileUsername && profileUsername[0] && profileUsername[0].toUpperCase()}</div>
+            <h2>Username: { profileUsername }</h2>
+            <p>Joined on: { profileJoined }</p>
             {isFriend
                 ? isChatOpen
                     ? <button>Open Chat</button>
