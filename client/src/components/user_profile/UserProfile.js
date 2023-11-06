@@ -6,6 +6,7 @@ const API_URL = 'https://localhost:3500/v1';
 function UserProfile (props) {
 
     const [isFriend, setIsFriend] = useState(false);
+    const [isRequestPending, setPendingRequest] = useState(false);
     const [isChatOpen, setIsChatOpen] = useState(false);
     const [profileJoined, setJoined] = useState('');
     const [profileUsername, setUsername] = useState('');
@@ -13,6 +14,8 @@ function UserProfile (props) {
     const location = useLocation();
     const params = new URLSearchParams(location.search);
     const profileId = Number(params.get('id'));
+
+    const viewerId = props.id;
 
     async function GetUserData (id) {
         const resp = await fetch(API_URL + '/user/get_user_data', {
@@ -43,10 +46,28 @@ function UserProfile (props) {
 
         if (!data.pending && data.accepted) {
             setIsFriend(true);
+        } else if (data.pending) {
+            setPendingRequest(true);
         }
     }
 
-    const viewerId = props.id;
+    async function sendFriendRequest (senderUserId, receiverUserId) {
+        console.log(senderUserId, receiverUserId);
+        const resp = await fetch(API_URL + '/user/send_friendship_request', {
+        method: 'post',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({
+                senderUserId: senderUserId,
+                receiverUserId: receiverUserId,
+            }),
+        });
+
+        const data = await resp.json();
+
+        if (data.id) {
+            setPendingRequest(true);
+        }
+    }
 
     useEffect(() => {
         GetUserData(profileId);
@@ -62,7 +83,9 @@ function UserProfile (props) {
                 ? isChatOpen
                     ? <button>Open Chat</button>
                     : <button>Start New Chat</button>
-                : <button>Send Friend request</button>}
+                : isRequestPending
+                    ? <button>Request Pending</button>
+                    : <button onClick={() => sendFriendRequest(viewerId, profileId)}>Send Friend request</button>}
         </div>
     )
 }
