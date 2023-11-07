@@ -1,4 +1,4 @@
-const { findUserInDatabase, getUserDataFromDatabase, getFriendshipData, sendFriendshipRequestInDatabase } = require('../../app/user/user.data-access');
+const { findUserInDatabase, getUserDataFromDatabase, getFriendshipData, sendFriendshipRequestInDatabase, handleIncomingRequestsInDatabase } = require('../../app/user/user.data-access');
 
 async function findUserHelper (username) {
     const usersData = await findUserInDatabase(username);
@@ -40,9 +40,20 @@ async function sendFriendshipRequestHelper (senderUserId, receiverUserId) {
     }
 }
 
+async function handleIncomingRequestsHelper (senderUserId, receiverUserId, requestStatus) {
+    const friendshipStatus = await handleIncomingRequestsInDatabase(senderUserId, receiverUserId, requestStatus);
+
+    if (friendshipStatus.length !== 0 && !friendshipStatus.error) {
+        return friendshipStatus;
+    } else {
+        return { error: 'Error while handling friend request' };
+    }
+}
+
 module.exports = {
     findUserHelper,
     getUserInfoHelper,
     checkFriendshipHelper,
-    sendFriendshipRequestHelper
+    sendFriendshipRequestHelper,
+    handleIncomingRequestsHelper
 }

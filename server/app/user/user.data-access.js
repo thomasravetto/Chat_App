@@ -64,9 +64,34 @@ async function sendFriendshipRequestInDatabase (senderUserId, receiverUserId) {
     }
 }
 
+async function handleIncomingRequestsInDatabase (senderUserId, receiverUserId, requestStatus) {
+    try {
+        const friendshipStatus = await db('friendships')
+        .where({
+            senderid: senderUserId,
+            receiverid: receiverUserId,
+            pending: true
+        })
+        .orWhere({
+            senderid: receiverUserId,
+            receiverid: senderUserId,
+            pending: true
+        })
+        .update({
+            pending: false,
+            accepted: requestStatus
+        });
+
+        return friendshipStatus;
+    } catch (error) {
+        return { error };
+    }
+}
+
 module.exports = {
     findUserInDatabase,
     getUserDataFromDatabase,
     getFriendshipData,
-    sendFriendshipRequestInDatabase
+    sendFriendshipRequestInDatabase,
+    handleIncomingRequestsInDatabase
 }
