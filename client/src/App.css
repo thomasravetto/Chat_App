@@ -339,6 +339,7 @@ input {
 	top: 10px;
 	right: 40px;
 	height: 6rem;
+	width: 6rem;
 }
 
 .search_user_input {
@@ -426,4 +427,37 @@ input {
 	border-radius: 50%;
   }
 
+  .incoming_request_container {
+	background-color: rgb(247, 247, 247);
+	border: 1px solid rgb(193, 193, 193);
+	border-radius: 5px;
+	height: 15vh;
+	width: 30vw;
+  }
+
+  .incoming_request_message {
+	margin-bottom: 10px;
+  }
+
+  .accept_button {
+	color: green;
+	background-color: rgb(231, 255, 231);
+	border: 1px solid green;
+	border-radius: 50%;
+	width: 6vh;
+	height: 6vh;
+	padding: 0;
+	margin-right: 10px;
+  }
+
+  .refuse_button {
+	color: red;
+	background-color: #ffebeb;
+	border: 1px solid red;
+	border-radius: 50%;
+	width: 6vh;
+	height: 6vh;
+	padding: 0;
+	margin-left: 10px;
+  }
 /* Profile Page */

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import appLogo from '../../logo_chat_app.png';
+import appLogo from '../../logo.png';
 import SearchUsers from './SearchUsers';
 
 const API_URL = 'https://localhost:3500/v1';
@@ -49,6 +49,7 @@ function NavBar (props) {
             <input type='text'className='search_user_input' placeholder='Find New Friends' onChange={onInputChange}></input>
             <img className='logo_image' src={appLogo} alt='Logo'></img>
             <SearchUsers foundUsers={foundUsers}/>
+            <h2>{props.username}</h2>
         </div>
     )
 }
