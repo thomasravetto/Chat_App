@@ -1,1 +1,1 @@
-Aggiunta funzione nell'api per controllare le amicizie
+La funzione delle amicizie dovrebbe essere finita, devo aggiungere una cosa che dica che la richiesta è stata rifiutata

@@ -325,7 +325,7 @@ input {
 /* NavBar */
 
 .navbar_container {
-	height: 7rem;
+	height: 10vh;
 	width: 100%;
 	position: absolute;
 	left: 0;
@@ -340,18 +340,35 @@ input {
 	right: 40px;
 	height: 6rem;
 	width: 6rem;
+	border-radius: 50%;
 }
 
 .search_user_input {
 	position: absolute;
-	top: 3vh;
-	left: 10vw;
+	top: 5vh;
+	left: 5vw;
 	width: 15vw;
 	height: 2vh;
 	border: 1px solid rgb(205, 205, 205);
 	border-radius: 5px;
 	background-color: white;
 	margin: 0;
+	transform: translate(50%, -50%);
+}
+
+.navbar_image {
+	width: 5vh; /* Set the desired width for the square */
+	height: 5vh; /* Set the same height to make it a square */
+	background-color: rgb(255, 183, 0);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-size: 2.4vh;
+	font-weight: 500;
+	border-radius: 50%;
+	position: absolute;
+	top: 5vh;
+	transform: translate(50%, -50%);
 }
 
 
@@ -416,8 +433,8 @@ input {
 }
 
 .user_name_image {
-	width: 20vh; /* Set the desired width for the square */
-	height: 20vh; /* Set the same height to make it a square */
+	width: 20vh;
+	height: 20vh;
 	background-color: rgb(255, 183, 0);
 	display: flex;
 	justify-content: center;
