@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import appLogo from '../../logo.png';
+import appLogo from '../../final_logo.png';
 import SearchUsers from './SearchUsers';
 
 const API_URL = 'https://localhost:3500/v1';

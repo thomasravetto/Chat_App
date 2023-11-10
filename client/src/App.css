@@ -338,9 +338,10 @@ input {
 	position: absolute;
 	top: 10px;
 	right: 40px;
-	height: 6rem;
-	width: 6rem;
+	height: 7vh;
+	width: 7vh;
 	border-radius: 50%;
+	border: solid 2px #4d95ee;
 }
 
 .search_user_input {
@@ -357,9 +358,9 @@ input {
 }
 
 .navbar_image {
-	width: 5vh; /* Set the desired width for the square */
-	height: 5vh; /* Set the same height to make it a square */
-	background-color: rgb(255, 183, 0);
+	width: 5vh;
+	height: 5vh;
+	background-color: #F6F4EB;
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -435,7 +436,7 @@ input {
 .user_name_image {
 	width: 20vh;
 	height: 20vh;
-	background-color: rgb(255, 183, 0);
+	background-color: #F6F4EB;
 	display: flex;
 	justify-content: center;
 	align-items: center;

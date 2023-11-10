@@ -79,7 +79,7 @@ function App() {
             !sessionChecked ?
               <Loader/> :
               isAuthenticated ?
-                <Home username={username} email={email}/> :
+                <Home userId={userId} username={username} email={email}/> :
                 <Navigate replace to={'/authentication'}/>
           }/>
           <Route path='/profile' element={<UserProfile id={userId}/>}/>
