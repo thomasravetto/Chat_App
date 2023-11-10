@@ -10,10 +10,17 @@ async function findUserInDatabase (username) {
     }
 }
 
-async function getUserDataFromDatabase (id) {
-    try {
-        const userData = await db('users').where('id', `${id}`);
 
+// This function can return a single user or an array if the input ids is an array
+async function getUserDataFromDatabase (ids) {
+    try {
+        if (!Array.isArray(ids)) {
+            const userData = await db('users').where('id', `${ids}`);
+
+            return userData;
+        }
+
+        const userData = await db('users').whereIn('id', ids);
         return userData;
     } catch (error) {
         return { error };
