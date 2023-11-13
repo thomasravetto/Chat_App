@@ -479,3 +479,54 @@ input {
 	margin-left: 10px;
   }
 /* Profile Page */
+
+
+/* Homepage Chat View */
+
+.friends_container {
+	background-color: rgb(224, 224, 224);
+	position: absolute;
+	left: 0;
+	top: 10vh;
+	height: 90vh;
+	width: 25vw;
+	border-right: solid 2px rgba(76, 170, 252, 0.9);
+	border-top: solid 2px rgba(76, 170, 252, 0.9);
+}
+
+.friend_view {
+	background-color: white;
+	margin: 0;
+	margin-bottom: 2px;
+	border-radius: 1px;
+	display: flex;
+	align-items: center;
+	padding: 10px;
+	place-content: space-around;
+}
+
+.friend_image {
+	background-color: #F6F4EB;
+	border-radius: 50%;
+	width: 5vh;
+	height: 5vh;
+	font-size: 2.4vh;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	position: relative;
+	left: 1vw;
+}
+
+.chat_container {
+	background-image: url('../public/sfondo-tom.png');
+	background-position: center;
+	position: absolute;
+	right: 0;
+	top: 10vh;
+	height: 90vh;
+	width: 75vw;
+	border-top: solid 2px rgba(76, 170, 252, 0.9);
+}
+
+/* Homepage Chat View */
