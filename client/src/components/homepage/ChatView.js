@@ -1,10 +1,11 @@
 function ChatView (props) {
     return (
         <div className="chat_container">
-            {props.chatView ?
-                props.chatView.map((chat) => (
-                    <div key={chat}>{chat}</div>
-                )) :
+            {props.openedChatId ?
+                // props.chatView.map((chat) => (
+                //         <div key={chat}>{chat}</div>
+                // )) :
+                <p>{props.openedChatId}</p> :
                 <div>Select a Chat to open it</div>
             }
         </div>

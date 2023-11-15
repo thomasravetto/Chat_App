@@ -11,6 +11,7 @@ function Home (props) {
     const [username, setUsername] = useState(props.username); // change to props.username
     const [email, setEmail] = useState(props.email);
     const [friendsList, setFriendsList] = useState(); // change back to null
+    const [openedChatId, setOpenedChatId] = useState();
 
     async function populateFriendsList (username) {
         const resp = await fetch(API_URL + '/friends/get_friends', {
@@ -22,14 +23,52 @@ function Home (props) {
         });
         const data = await resp.json();
 
-        console.log(data);
-
         const friendsList = data.map((user) => ({
             id: user.id,
             username: user.username
         }));
 
         setFriendsList(friendsList);
+    }
+
+    async function loadChat(userId, friendId) {
+        const resp = await fetch(API_URL + '/chat/get_chat', {
+            method: 'post',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({
+                userId: userId,
+                friendId, friendId,
+            })
+        });
+
+        const chatData = await resp.json();
+
+
+        if (chatData.id) {
+            setOpenedChatId(chatData.id);
+        } else if (chatData.error === 'No chat was found') {
+
+            const resp = await fetch(API_URL + '/chat/create_chat', {
+                method: 'post',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({
+                    userId: userId,
+                    friendId: friendId
+                })
+            });
+
+            const newChatData = await resp.json();
+
+            if (newChatData.id) {
+                setOpenedChatId(newChatData.id);
+            } else if (newChatData.error) {
+                console.error(newChatData);
+            }
+
+        } else {
+            console.error('error while fetching chat');
+        }
+        console.log('chatid', openedChatId);
     }
 
     useEffect(() => {
@@ -40,8 +79,8 @@ function Home (props) {
         <div>
             <NavBar username={username}/>
             <div className='chat_and_friends_container'>
-                <FriendsList friendsList={friendsList}/>
-                <ChatView chatView={''}/>
+                <FriendsList userId={userId} friendsList={friendsList} loadChat={loadChat}/>
+                <ChatView openedChatId={openedChatId}/>
             </div>
         </div>
     )
