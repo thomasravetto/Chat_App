@@ -505,6 +505,15 @@ input {
 	place-content: space-around;
 }
 
+.friend_view:hover {
+	background-color: whitesmoke;
+}
+
+.friend_view:active {
+	background-color: rgb(230, 230, 230);
+	transform: scale(0.95);
+}
+
 .friend_image {
 	background-color: #F6F4EB;
 	border-radius: 50%;
