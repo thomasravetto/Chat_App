@@ -529,13 +529,65 @@ input {
 
 .chat_container {
 	background-image: url('../public/sfondo-tom.png');
+	background-size: cover;
 	background-position: center;
+	background-repeat: no-repeat;
 	position: absolute;
 	right: 0;
 	top: 10vh;
-	height: 90vh;
+	height: 80vh;
 	width: 75vw;
 	border-top: solid 2px rgba(76, 170, 252, 0.9);
+	display: flex;
+	flex-direction: column;
+	overflow: scroll;
 }
 
+
+/* Messages */
+
+.message {
+	max-width: 40%;
+	margin: 5px;
+	padding: 10px;
+	border-radius: 8px;
+	display: flex;
+  }
+
+
+  .message.sentbyuser {
+	background-color: #c3d7ff;
+	align-self: flex-end;
+	margin-right: 5vw;
+  }
+
+
+  .message.sentbyfriend {
+	background-color: #5289ff;
+	align-self: flex-start;
+	margin-left: 5vw;
+  }
+
+  .messages_form {
+	position: fixed;
+    top: 90vh;
+    width: 100vw;
+    background-color: white;
+    height: 10vh;
+    padding: 1.5vh;
+	padding-right: 25vw;
+  }
+
+  .messages_input {
+	width: 50%;
+	border-radius: 5px;
+  }
+
+  .messages_button {
+	border-radius: 5px;
+  }
+
+/* Messages */
+
 /* Homepage Chat View */
+

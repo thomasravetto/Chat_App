@@ -10,7 +10,7 @@ function Home (props) {
     const [userId, setUserId] = useState(props.userId); // change to props.userId
     const [username, setUsername] = useState(props.username); // change to props.username
     const [email, setEmail] = useState(props.email);
-    const [friendsList, setFriendsList] = useState(); // change back to null
+    const [friendsList, setFriendsList] = useState([]); // change back to null
     const [openedChatId, setOpenedChatId] = useState();
 
     async function populateFriendsList (username) {
@@ -68,7 +68,6 @@ function Home (props) {
         } else {
             console.error('error while fetching chat');
         }
-        console.log('chatid', openedChatId);
     }
 
     useEffect(() => {
@@ -80,7 +79,7 @@ function Home (props) {
             <NavBar username={username}/>
             <div className='chat_and_friends_container'>
                 <FriendsList userId={userId} friendsList={friendsList} loadChat={loadChat}/>
-                <ChatView openedChatId={openedChatId}/>
+                <ChatView openedChatId={openedChatId} userId={userId}/>
             </div>
         </div>
     )
