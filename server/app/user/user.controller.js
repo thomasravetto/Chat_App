@@ -43,7 +43,7 @@ async function checkFriendship (req, res) {
     try {
         const friendshipData = await checkFriendshipHelper(viewerUserId, profileUserId);
 
-        res.json(friendshipData);
+        res.status(200).json(friendshipData);
     } catch (error) {
         res.status(400).json({error: error.message});
     }

@@ -6,6 +6,7 @@ const oauthRouter = require('./oauth/oauth.api');
 const userRouter = require('./user/user.api');
 const friendsRouter = require('./friends/friends.api');
 const chatRouter = require('./chat/chat.api');
+const messagesRouter = require('./messages/messages.api');
 
 const { sessionChecker } = require('../helpers/session/session_checker.helper');
 
@@ -17,6 +18,7 @@ api.use('/auth', oauthRouter);
 api.use('/user', userRouter);
 api.use('/friends', friendsRouter);
 api.use('/chat', chatRouter);
+api.use('/messages', messagesRouter);
 
 api.get('/check_session', sessionChecker);
 
