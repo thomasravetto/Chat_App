@@ -579,12 +579,22 @@ input {
   }
 
   .messages_input {
-	width: 50%;
-	border-radius: 5px;
+	width: 50vw;
+	border-radius: 8px;
+	padding: 20px 0px;
+	resize: none;
+	overflow: hidden;
+	height: 4vh;
   }
 
   .messages_button {
 	border-radius: 5px;
+	height: 3vh;
+	width: 3vh;
+	padding: 0;
+	position: relative;
+	bottom: 1.7vh;
+	right: 1.8vw;
   }
 
 /* Messages */

@@ -1,9 +1,10 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 function ChatView(props) {
   const API_URL = 'https://localhost:3500/v1';
   const [messages, setMessages] = useState([]);
   const [toBeSentMessage, setToBeSentMessage] = useState('');
+  const chatContainerRef = useRef(null);
 
   async function loadMessages(openedChatId) {
     const resp = await fetch(API_URL + '/messages/get_messages', {
@@ -15,8 +16,6 @@ function ChatView(props) {
     });
 
     const messagesData = await resp.json();
-
-    console.log(messagesData, messages);
 
     if (messagesData.length !== 0 && messagesData[0] && messagesData[0].content) {
       setMessages(messagesData);
@@ -41,8 +40,19 @@ function ChatView(props) {
 
     const newMessage = await resp.json();
 
-    setMessages(prevMessages => [...prevMessages, newMessage]);
+    sendMessageOnSocket(props.io, newMessage.chatid, newMessage);
     setToBeSentMessage('');
+  }
+
+  function sendMessageOnSocket(socket, chatId, message) {
+    if (message) {
+      socket.emit('send_message', {chatId, message});
+      setMessages(prevMessages => [...prevMessages, message]);
+    }
+  }
+
+  function connectToChatOnSocket(socket, chatId) {
+    socket.emit('join', chatId);
   }
 
   function onMessageChange (event) {
@@ -58,13 +68,38 @@ function ChatView(props) {
   }
 
   useEffect(() => {
-    setMessages([]);
+    if (props.openedChatId) {
+      connectToChatOnSocket(props.io, props.openedChatId);
 
-    loadMessages(props.openedChatId);
+      setMessages([]);
+
+      loadMessages(props.openedChatId);
+    }
   }, [props.openedChatId]);
 
+  useEffect(() => {
+    chatContainerRef.current.scrollTop = chatContainerRef.current.scrollHeight;
+  }, [messages]);
+
+  useEffect(() => {
+    const handleReceiveMessage = (newMessage) => {
+      console.log('new, message', newMessage);
+      setMessages(prevMessages => [...prevMessages, newMessage.message]);
+    }
+
+    props.io.on('receive_message', handleReceiveMessage);
+
+    props.io.on('user_connected', (message) => {
+      console.log(message);
+    })
+
+    return () => {
+      props.io.off('receive_message', handleReceiveMessage);
+    }
+  }, [ props.io ]);
+
   return (
-    <div className="chat_container">
+    <div className="chat_container" ref={chatContainerRef}>
       {props.openedChatId ? (
         messages.length !== 0 ? (
           messages.map((message) => (

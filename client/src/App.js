@@ -7,9 +7,14 @@ import './App.css';
 import Loader from './components/loader/Loader';
 import UserProfile from './components/user_profile/UserProfile';
 
+import socket from 'socket.io-client';
+
+const API_URL = 'https://localhost:3500/v1';
+
+const io = socket.connect('https://localhost:3500');
+
 function App() {
 
-  const API_URL = 'https://localhost:3500/v1';
 
   const [isActive, setIsActive] = useState(false);
   const [isAuthenticated, setAuthenticated] = useState(false);  // CHANGE BACK TO FALSE
@@ -79,7 +84,7 @@ function App() {
             !sessionChecked ?
               <Loader/> :
               isAuthenticated ?
-                <Home userId={userId} username={username} email={email}/> :
+                <Home userId={userId} username={username} email={email} io={io}/> :
                 <Navigate replace to={'/authentication'}/>
           }/>
           <Route path='/profile' element={<UserProfile id={userId}/>}/>

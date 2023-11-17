@@ -79,7 +79,7 @@ function Home (props) {
             <NavBar username={username}/>
             <div className='chat_and_friends_container'>
                 <FriendsList userId={userId} friendsList={friendsList} loadChat={loadChat}/>
-                <ChatView openedChatId={openedChatId} userId={userId}/>
+                <ChatView openedChatId={openedChatId} userId={userId} io={props.io}/>
             </div>
         </div>
     )
