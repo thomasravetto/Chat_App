@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import appLogo from '../../final_logo.png';
 import SearchUsers from './SearchUsers';
+import Notifications from './Notifications';
 
 const API_URL = 'https://localhost:3500/v1';
 let timer;
@@ -49,6 +50,7 @@ function NavBar (props) {
             <div className="navbar_image">{props.username && props.username[0] && props.username[0].toUpperCase()}</div>
             <input type='text'className='search_user_input' placeholder='Find New Friends' onChange={onInputChange}></input>
             <img className='logo_image' src={appLogo} alt='Logo'></img>
+            <Notifications userId={props.userId}/>
             <SearchUsers foundUsers={foundUsers}/>
             <h2>{props.username}</h2>
         </div>

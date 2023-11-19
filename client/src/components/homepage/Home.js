@@ -13,7 +13,7 @@ function Home (props) {
     const [friendsList, setFriendsList] = useState([]); // change back to null
     const [openedChatId, setOpenedChatId] = useState();
 
-    async function populateFriendsList (username) {
+    async function populateFriendsList (userId) {
         const resp = await fetch(API_URL + '/friends/get_friends', {
             method: 'post',
             headers: { 'Content-Type': 'application/json' },
@@ -71,12 +71,12 @@ function Home (props) {
     }
 
     useEffect(() => {
-        populateFriendsList(username);
+        populateFriendsList(userId);
     }, [userId]);
 
     return (
         <div>
-            <NavBar username={username}/>
+            <NavBar username={username} userId={userId}/>
             <div className='chat_and_friends_container'>
                 <FriendsList userId={userId} friendsList={friendsList} loadChat={loadChat}/>
                 <ChatView openedChatId={openedChatId} userId={userId} io={props.io}/>
