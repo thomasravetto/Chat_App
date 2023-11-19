@@ -36,6 +36,7 @@ async function getFriendshipData (viewerUserId, profileUserId) {
             senderid: profileUserId,
             receiverid: viewerUserId
         });
+
         return friendshipData;
     } catch (error) {
         return { error };
@@ -95,10 +96,30 @@ async function handleIncomingRequestsInDatabase (senderUserId, receiverUserId, r
     }
 }
 
+async function getIncomingRequestsFromDatabase(userId) {
+    try {
+        const incomingRequests = await db('friendships')
+        .where({
+            receiverid: userId,
+            pending: true,
+            accepted: false
+        });
+
+        const senderIds = incomingRequests.map((request) => request.senderid);
+
+        const senderUsernames = await getUserDataFromDatabase(senderIds);
+
+        return senderUsernames;
+     } catch (error) {
+        return { error };
+    }
+}
+
 module.exports = {
     findUserInDatabase,
     getUserDataFromDatabase,
     getFriendshipData,
     sendFriendshipRequestInDatabase,
-    handleIncomingRequestsInDatabase
+    handleIncomingRequestsInDatabase,
+    getIncomingRequestsFromDatabase
 }

@@ -1,6 +1,6 @@
 const express = require('express');
 
-const { findUserHelper, getUserInfoHelper, checkFriendshipHelper, sendFriendshipRequestHelper, handleIncomingRequestsHelper } = require('../../helpers/user/user.helper');
+const { findUserHelper, getUserInfoHelper, checkFriendshipHelper, sendFriendshipRequestHelper, handleIncomingRequestsHelper, getIncomingRequestsHelper } = require('../../helpers/user/user.helper');
 
 async function findUsersByUsername (req, res) {
     const { username } = req.body;
@@ -17,7 +17,7 @@ async function findUsersByUsername (req, res) {
         });
     } else if (usersData.error) {
         const error = usersData.error;
-        res.status(400).json({ error });
+        res.status(400).json({ error: error.message });
     }
 }
 
@@ -33,7 +33,7 @@ async function getUserInfo (req, res) {
             throw new Error('Error while getting user data');
         }
     } catch (error) {
-        res.status(400).json({error: error.message});
+        res.status(400).json({ error: error.message });
     }
 
 }
@@ -45,7 +45,7 @@ async function checkFriendship (req, res) {
 
         res.status(200).json(friendshipData);
     } catch (error) {
-        res.status(400).json({error: error.message});
+        res.status(400).json({ error: error.message });
     }
 }
 
@@ -56,7 +56,7 @@ async function sendFriendshipRequest (req, res) {
 
         res.status(200).json(friendshipRequest);
     } catch (error) {
-        res.status(400).json({error: error.message});
+        res.status(400).json({ error: error.message });
     }
 }
 
@@ -68,7 +68,19 @@ async function handleIncomingRequests (req, res) {
 
         res.status(200).json(friendshipStatus);
     } catch (error) {
-        res.status(400).json({error: error.message});
+        res.status(400).json({ error: error.message });
+    }
+}
+
+async function getIncomingRequests (req, res) {
+    const { userId } = req.body;
+
+    try {
+        const incomingRequests = await getIncomingRequestsHelper(userId);
+
+        res.status(200).json(incomingRequests);
+    } catch (error) {
+        res.status(400).json({ error: error.message })
     }
 }
 
@@ -77,5 +89,6 @@ module.exports = {
     getUserInfo,
     checkFriendship,
     sendFriendshipRequest,
-    handleIncomingRequests
+    handleIncomingRequests,
+    getIncomingRequests
 }
