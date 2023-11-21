@@ -120,12 +120,12 @@ function ChatView(props) {
       ) : (
         <div>Select a Chat to open it</div>
       )}
-      {props.openedChatId && (
+      <div className='messages_form_container'>
         <div className='messages_form'>
             <textarea onChange={onMessageChange} onKeyDown={handleKeyPress} type='text' className='messages_input' value={toBeSentMessage} rows={1}></textarea>
             <button onClick={() => sendMessage(props.openedChatId, props.userId, toBeSentMessage)} className='messages_button'>&#8594;</button>
         </div>
-        )}
+      </div>
     </div>
   );
 }

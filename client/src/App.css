@@ -330,7 +330,7 @@ input {
 	position: absolute;
 	left: 0;
 	top: 0;
-	background-color: rgb(214, 236, 255, 0.7);
+	background-color: #749BC2;
 
 }
 
@@ -553,61 +553,91 @@ input {
 
 /* Homepage Chat View */
 
-.friends_container {
-	background-color: rgb(224, 224, 224);
+.friends_external_container {
+	background: rgb(121,63,223);
+	background: -moz-linear-gradient(180deg, rgba(121,63,223,1) 40%, rgba(255,255,255,1) 100%);
+	background: -webkit-linear-gradient(180deg, rgba(121,63,223,1) 40%, rgba(255,255,255,1) 100%);
+	background: linear-gradient(180deg, rgba(121,63,223,1) 40%, rgba(255,255,255,1) 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#793fdf",endColorstr="#ffffff",GradientType=1);
 	position: absolute;
 	left: 0;
 	top: 10vh;
 	height: 90vh;
 	width: 25vw;
-	border-right: solid 2px rgba(76, 170, 252, 0.9);
-	border-top: solid 2px rgba(76, 170, 252, 0.9);
+	border-right: solid 1px white;
+	border-top: solid 1px white;
+}
+
+.friends_container {
+	background-color: white;
+	position: relative;
+	width: 90%;
+	left: 5%;
+	top: 2%;
+	border-radius: 10px;
+}
+
+.friends_container>a:last-of-type {
+	border-bottom-left-radius: 10px;
+	border-bottom-right-radius: 10px;
+}
+
+.friends_container>a:first-of-type {
+	border-top-left-radius: 10px;
+	border-top-right-radius: 10px;
 }
 
 .friend_view {
-	background-color: white;
+	background-color: #ffffff;
 	margin: 0;
-	margin-bottom: 2px;
-	border-radius: 1px;
-	display: flex;
-	align-items: center;
+	border-bottom: 1px solid rgb(231, 231, 231);
+	display: block;
 	padding: 10px;
-	place-content: space-around;
+	transition: 0.2s;
 }
 
 .friend_view:hover {
-	background-color: whitesmoke;
+	background-color: rgb(213, 188, 255);
 }
 
 .friend_view:active {
-	background-color: rgb(230, 230, 230);
+	background-color: rgb(155, 112, 228);
 	transform: scale(0.95);
 }
 
 .friend_image {
 	background-color: #F6F4EB;
 	border-radius: 50%;
-	width: 5vh;
-	height: 5vh;
+	width: 2.3em;
+	height: 2.3em;
 	font-size: 2.4vh;
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	position: relative;
-	left: 1vw;
+	top: 3.9vh;
+	transform: translate(50%, -50%);
+}
+
+.friend_username {
+	position: relative;
+	bottom: 2.5vh;
+	left: 6vw;
+	text-align: left;
+	font-weight: 600;
 }
 
 .chat_container {
-	background-image: url('../public/sfondo-tom.png');
+	background-image: url('../public/sfondo_decisivo.jpeg');
 	background-size: cover;
 	background-position: center;
 	background-repeat: no-repeat;
 	position: absolute;
 	right: 0;
 	top: 10vh;
-	height: 80vh;
+	height: 90vh;
 	width: 75vw;
-	border-top: solid 2px rgba(76, 170, 252, 0.9);
+	border-top: solid 1px white;
 	display: flex;
 	flex-direction: column;
 	overflow: scroll;
@@ -642,7 +672,7 @@ input {
 	position: fixed;
     top: 90vh;
     width: 100vw;
-    background-color: white;
+    background-color: #F6F4EB;
     height: 10vh;
     padding: 1.5vh;
 	padding-right: 25vw;
@@ -665,6 +695,15 @@ input {
 	position: relative;
 	bottom: 1.7vh;
 	right: 1.8vw;
+  }
+
+  .messages_form_container {
+	background-color: #F6F4EB;
+	position: absolute;
+	bottom: 0;
+	height: 12vh;
+	width: 75vw;
+	z-index: 5;
   }
 
 /* Messages */

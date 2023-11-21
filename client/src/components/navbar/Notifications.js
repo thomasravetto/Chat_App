@@ -26,9 +26,9 @@ function Notifications (props) {
         setIds(requestsIds);
     }
 
-    useEffect(() => {
-        getIncomingRequests(props.userId)
-    }, [props.userId]);
+    // useEffect(() => {
+    //     getIncomingRequests(props.userId)
+    // }, [props.userId]);
 
     return (
         <div className="bell_container">

@@ -10,7 +10,27 @@ function Home (props) {
     const [userId, setUserId] = useState(props.userId); // change to props.userId
     const [username, setUsername] = useState(props.username); // change to props.username
     const [email, setEmail] = useState(props.email);
-    const [friendsList, setFriendsList] = useState([]); // change back to null
+    const [friendsList, setFriendsList] = useState(
+        [
+            {
+                "id": 18,
+                "username": "sara",
+                "email": "sara@gmail.com",
+                "joined": "2023-11-07T11:17:08.686Z"
+            },
+            {
+                "id": 19,
+                "username": "Thomas Ravetto",
+                "email": "travetto18@gmail.com",
+                "joined": "2023-11-07T12:36:03.114Z"
+            },
+            {
+                "id": 22,
+                "username": "saretta",
+                "email": "ferrarisara@gmail.com",
+                "joined": "2023-11-09T11:53:11.177Z"
+            }
+        ]); // change back to null
     const [openedChatId, setOpenedChatId] = useState();
 
     async function populateFriendsList (userId) {
@@ -70,9 +90,9 @@ function Home (props) {
         }
     }
 
-    useEffect(() => {
-        populateFriendsList(userId);
-    }, [userId]);
+    // useEffect(() => {
+    //     populateFriendsList(userId);
+    // }, [userId]);
 
     return (
         <div>

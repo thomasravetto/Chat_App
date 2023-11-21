@@ -17,11 +17,11 @@ function App() {
 
 
   const [isActive, setIsActive] = useState(false);
-  const [isAuthenticated, setAuthenticated] = useState(false);  // CHANGE BACK TO FALSE
+  const [isAuthenticated, setAuthenticated] = useState(true);  // CHANGE BACK TO FALSE
   const [userId, setId] = useState();
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
-  const [sessionChecked, setSessionChecked] = useState(false); // change back to false
+  const [sessionChecked, setSessionChecked] = useState(true); // change back to false
 
   const changePanel = (event) => {
         setIsActive(current => !current);
