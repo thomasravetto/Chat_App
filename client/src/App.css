@@ -54,8 +54,8 @@ a {
 
 button{
 	border-radius: 20px;
-	border: 1px solid #279EFF;
-	background-color: #279EFF;
+	border: 1px solid #4d95ee;
+	background-color: #4d95ee;
 	color: #FFFFFF;
 	font-size: 12px;
 	font-weight: bold;
@@ -177,11 +177,11 @@ input {
 }
 
 .overlay {
-	background: rgb(122,195,255);
-	background: -moz-radial-gradient(circle, rgba(122,195,255,1) 0%, rgba(0,140,255,1) 100%);
-	background: -webkit-radial-gradient(circle, rgba(122,195,255,1) 0%, rgba(0,140,255,1) 100%);
-	background: radial-gradient(circle, rgba(122,195,255,1) 0%, rgba(0,140,255,1) 100%);
-	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#7ac3ff",endColorstr="#008cff",GradientType=1);
+	background: rgb(134,188,255);
+	background: -moz-radial-gradient(circle, rgba(134,188,255,1) 0%, rgba(77,149,238,1) 100%);
+	background: -webkit-radial-gradient(circle, rgba(134,188,255,1) 0%, rgba(77,149,238,1) 100%);
+	background: radial-gradient(circle, rgba(134,188,255,1) 0%, rgba(77,149,238,1) 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#86bcff",endColorstr="#4d95ee",GradientType=1);
 	background-repeat: no-repeat;
 	background-size: cover;
 	background-position: 0 0;
@@ -330,18 +330,16 @@ input {
 	position: absolute;
 	left: 0;
 	top: 0;
-	background-color: #749BC2;
+	background-color: rgb(239, 239, 239);
 
 }
 
 .logo_image {
 	position: absolute;
-	top: 10px;
-	right: 40px;
+	top: 1.7vh;
+	right: 3vw;
 	height: 7vh;
 	width: 7vh;
-	border-radius: 50%;
-	border: solid 2px #4d95ee;
 }
 
 .search_user_input {
@@ -360,7 +358,7 @@ input {
 .navbar_image {
 	width: 5vh;
 	height: 5vh;
-	background-color: #F6F4EB;
+	background-color: #4d95ee;
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -368,7 +366,7 @@ input {
 	font-weight: 500;
 	border-radius: 50%;
 	position: absolute;
-	top: 5vh;
+	top: 4.5vh;
 	transform: translate(50%, -50%);
 }
 
@@ -377,7 +375,7 @@ input {
 .bell_container {
 	position: absolute;
 	left: 6vw;
-	top: 3vh;
+	top: 3.8vh;
 	cursor: pointer;
 }
 
@@ -389,7 +387,7 @@ input {
 	position: relative;
 	bottom: 3em;
 	left: 1em;
-	background-color: rgb(0, 85, 255);
+	background-color: #4d95ee;
 	height: 18px;
 	width: 18px;
 	border-radius: 50%;
@@ -400,13 +398,13 @@ input {
 .requests_container {
 	display: none;
 	position: absolute;
-	top: 4vh;
-	left: 2vw;
+	top: 25px;
+	left: 25px;
 	z-index: 2;
 	background-color: white;
-	height: auto;
 	width: 15vw;
-	border-radius: 5px;
+	border-radius: 10px;
+	box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 }
 
 .requests_container:hover {
@@ -418,16 +416,36 @@ input {
 	display: block;
 }
 
+.requests_container>a:first-of-type {
+	border-top-left-radius: 10px;
+	border-top-right-radius: 10px;
+}
+
+.requests_container>a:last-of-type {
+	border-bottom-left-radius: 10px;
+	border-bottom-right-radius: 10px;
+	border-bottom: none;
+}
+
 .notification_user {
 	display: block;
+	margin: 0;
+	padding: 5px 0;
+	transition: 0.2s;
+	border-bottom: 1px solid rgb(231, 231, 231);
 }
 
 .notification_user:hover {
-	background-color: rgb(228, 228, 228);
+	background-color: #eeeeee;
+}
+
+.notification_user:active {
+	background-color: #e2e2e2;
+	transform: scale(0.95);
 }
 
 .notification_user_image {
-	background-color: #F6F4EB;
+	background-color: #4d95ee;
 	border-radius: 50%;
 	width: 3vh;
 	height: 3vh;
@@ -437,6 +455,16 @@ input {
 	align-items: center;
 	position: relative;
 	left: 1vw;
+	transform: translate(50%, -50%);
+	top: 2.2vh;
+}
+
+.notification_user_name {
+	position: relative;
+	bottom: 1.5vh;
+	left: 6vw;
+	text-align: left;
+	font-weight: 600;
 }
 
 /* Notifications */
@@ -445,43 +473,77 @@ input {
 /* SearchBox */
 
 .searchbox_container {
+	box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 	position: absolute;
 	left: 12.5vw;
 	top: 7vh;
-	height: auto;
 	width: 15vw;
-	border-radius: 5px;
+	border-radius: 10px;
 	z-index: 3;
 }
 
-.user {
-	border-bottom: 1px solid rgba(76, 170, 252, 0.9);
+.searchbox_container>a:first-of-type {
+	border-top-left-radius: 10px;
+	border-top-right-radius: 10px;
+}
+
+.searchbox_container>a:last-of-type {
+	border-bottom-left-radius: 10px;
+	border-bottom-right-radius: 10px;
+	border-bottom: none;
+}
+
+.searchbox_user {
 	margin: 0px;
-	padding: 10px 0px;
-	border-radius: 5px;
-	background-color: rgb(214, 236, 255, 0.9);
-	transition: transform 80ms ease-in;
+	padding: 5px 0px;
+	background-color: #ffffff;
+	transition: transform 0.2;
 	display: block;
+	border-bottom: 1px solid rgb(231, 231, 231);
 }
 
-.user:hover {
-	background-color: rgba(197, 228, 255, 0.9);
+.searchbox_user:hover {
+	background-color: #eeeeee;
 }
 
-.user:active {
-	background-color: rgba(139, 201, 255, 0.9);
-	transform: scale(0.96);
+.searchbox_user:active {
+	background-color: #e2e2e2;
+	transform: scale(0.95);
+}
+
+.searchbox_user_name {
+	position: relative;
+	bottom: 2vh;
+	left: 6vw;
+	text-align: left;
+	font-weight: 600;
+}
+
+.searchbox_user_image {
+	background-color: #4d95ee;
+	border-radius: 50%;
+	width: 2em;
+	height: 2em;
+	font-size: 2vh;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	position: relative;
+	top: 2.8vh;
+	transform: translate(50%, -50%);
 }
 
 .user_not_found {
 	color: rgb(217, 0, 0);
-	border-bottom: 1px solid rgba(76, 170, 252, 0.9);
+	font-weight: 600;
+	border-bottom: 1px solid #eeeeee;
 	margin: 0px;
 	padding: 10px 0px;
 	border-radius: 5px;
-	background-color: rgb(214, 236, 255, 0.9);
+	background-color: #ffffff;
 	transition: transform 80ms ease-in;
 	display: block;
+	box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 }
 
 /* SearchBox */
@@ -492,27 +554,54 @@ input {
 /* Profile Page */
 
 .profile_page {
-	width: 80vw;
+	width: 32vw;
 	height: 60vh;
-	background-color: rgb(230, 230, 230);
-	display: flex;
-	flex-direction: column;
-	justify-content: flex-start;
-	align-items: flex-start;
-	padding: 2rem;
+	background-color: #ffffff;
+	padding: 5vh 6vw;
 	border-radius: 10px;
-}
+	box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  }
 
-.user_name_image {
-	width: 20vh;
-	height: 20vh;
-	background-color: #F6F4EB;
+  .username_and_image_container {
+	box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+	border-radius: 10px;
+	height: 50vh;
+	width: 20vw;
+  }
+
+  .user_name_image {
+	width: 15vh;
+	height: 15vh;
+	background-color: #4d95ee;
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	font-size: 10vh;
+	font-size: 7vh;
 	font-weight: 500;
 	border-radius: 50%;
+	position: relative;
+	transform: translate(-50%);
+	left: 50%;
+	top: 5vh;
+  }
+
+  .user_name_name {
+	margin-top: 10px;
+	position: relative;
+	top: 7vh;
+  }
+
+  .user_joined {
+	position: relative;
+    bottom: 8vh;
+  }
+
+  .send_req_button, .friends_badge, .pending_button {
+	position: relative;
+	bottom: 28vh;
+	width: 14vw;
+	transform: translate(-50%);
+	left: 7vw;
   }
 
   .incoming_request_container {
@@ -520,55 +609,64 @@ input {
 	border: 1px solid rgb(193, 193, 193);
 	border-radius: 5px;
 	height: 15vh;
-	width: 30vw;
+	width: 90%;
+	margin: 0 5%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	position: relative;
+	bottom: 30vh;
   }
-
+  
   .incoming_request_message {
-	margin-bottom: 10px;
+	margin-top: 2vh;
+	margin-bottom: 1vh;
   }
-
-  .accept_button {
-	color: green;
-	background-color: rgb(231, 255, 231);
-	border: 1px solid green;
-	border-radius: 50%;
-	width: 6vh;
-	height: 6vh;
-	padding: 0;
-	margin-right: 10px;
-  }
-
+  
+  .accept_button,
   .refuse_button {
-	color: red;
-	background-color: #ffebeb;
-	border: 1px solid red;
+	color: white;
+	border: 1px solid transparent;
 	border-radius: 50%;
-	width: 6vh;
-	height: 6vh;
+	width: 5vh;
+	height: 5vh;
 	padding: 0;
-	margin-left: 10px;
+	margin: 0 5px;
+	cursor: pointer;
   }
+  
+  .accept_button {
+	background-color: rgb(175, 240, 175);
+	border: 1px solid green;
+	color: green;
+  }
+  
+  .refuse_button {
+	background-color: rgb(255, 218, 218);
+	border: 1px solid red;
+	color: red;
+  }
+
+
 /* Profile Page */
 
 
 /* Homepage Chat View */
 
 .friends_external_container {
-	background: rgb(121,63,223);
-	background: -moz-linear-gradient(180deg, rgba(121,63,223,1) 40%, rgba(255,255,255,1) 100%);
-	background: -webkit-linear-gradient(180deg, rgba(121,63,223,1) 40%, rgba(255,255,255,1) 100%);
-	background: linear-gradient(180deg, rgba(121,63,223,1) 40%, rgba(255,255,255,1) 100%);
-	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#793fdf",endColorstr="#ffffff",GradientType=1);
+	background-color: white;
 	position: absolute;
 	left: 0;
 	top: 10vh;
 	height: 90vh;
 	width: 25vw;
-	border-right: solid 1px white;
-	border-top: solid 1px white;
+	border-right: solid 2px rgb(236, 236, 236);
+	border-top: solid 2px rgb(236, 236, 236);
 }
 
 .friends_container {
+	box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 	background-color: white;
 	position: relative;
 	width: 90%;
@@ -577,14 +675,15 @@ input {
 	border-radius: 10px;
 }
 
-.friends_container>a:last-of-type {
-	border-bottom-left-radius: 10px;
-	border-bottom-right-radius: 10px;
-}
-
 .friends_container>a:first-of-type {
 	border-top-left-radius: 10px;
 	border-top-right-radius: 10px;
+}
+
+.friends_container>a:last-of-type {
+	border-bottom-left-radius: 10px;
+	border-bottom-right-radius: 10px;
+	border-bottom: none;
 }
 
 .friend_view {
@@ -594,19 +693,20 @@ input {
 	display: block;
 	padding: 10px;
 	transition: 0.2s;
+	cursor: pointer;
 }
 
 .friend_view:hover {
-	background-color: rgb(213, 188, 255);
+	background-color: #eeeeee;
 }
 
 .friend_view:active {
-	background-color: rgb(155, 112, 228);
+	background-color: #e2e2e2;
 	transform: scale(0.95);
 }
 
 .friend_image {
-	background-color: #F6F4EB;
+	background-color: #4d95ee;
 	border-radius: 50%;
 	width: 2.3em;
 	height: 2.3em;
@@ -627,21 +727,70 @@ input {
 	font-weight: 600;
 }
 
-.chat_container {
-	background-image: url('../public/sfondo_decisivo.jpeg');
+.message_container {
+	background-image: url('../public/flipped-background.png');
 	background-size: cover;
 	background-position: center;
 	background-repeat: no-repeat;
 	position: absolute;
 	right: 0;
 	top: 10vh;
-	height: 90vh;
+	height: 78vh;
 	width: 75vw;
-	border-top: solid 1px white;
+	border-top: solid 2px rgb(236, 236, 236);
 	display: flex;
 	flex-direction: column;
 	overflow: scroll;
+	padding: 0px 0px;
 }
+
+.message_container>div.message:first-of-type {
+	margin-top: 20px;
+}
+
+.message_container>div.message:last-of-type {
+	margin-bottom: 20px;
+}
+
+.example_title {
+	text-align: left;
+	padding-left: 50px;
+}
+
+.no_chat_container {
+	background-color: white;
+	height: 100vh;
+	margin: 0;
+  }
+
+.example_images_container {
+	display: flex;
+	justify-content: space-evenly;
+  }
+
+.example_image {
+	text-align: center;
+	box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+	width: 25vw;
+	padding: 10px;
+	border-radius: 10px;
+	margin-bottom: 10px;
+  }
+
+.friends_feed_image,
+.searchbar_friend_image,
+.notification_friend_image {
+	border-radius: 10px;
+  }
+
+.friends_feed_image {
+	width: 25vw;
+}
+
+.searchbar_friend_image,
+.notification_friend_image {
+	width: 23vw;
+  }
 
 
 /* Messages */
@@ -651,19 +800,35 @@ input {
 	margin: 5px;
 	padding: 10px;
 	border-radius: 8px;
-	display: flex;
+	word-wrap: break-word;
+	text-align: left;
+	min-width: 70px;
+	padding-left: 45px;
   }
+
+.message_content {
+	position: relative;
+	transform: translate(-30px);
+}
+
+.message_time {
+	margin: 0;
+	text-align: right;
+	font-size: 0.76em;
+}
 
 
   .message.sentbyuser {
-	background-color: #c3d7ff;
+	background-color: white;
+	box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 	align-self: flex-end;
 	margin-right: 5vw;
   }
 
 
   .message.sentbyfriend {
-	background-color: #5289ff;
+	background-color: #4d95ee;
+	box-shadow: rgba(100, 100, 111, 0.2) 5px 7px 15px 0px;
 	align-self: flex-start;
 	margin-left: 5vw;
   }
@@ -672,7 +837,7 @@ input {
 	position: fixed;
     top: 90vh;
     width: 100vw;
-    background-color: #F6F4EB;
+    background-color: rgb(239, 239, 239);
     height: 10vh;
     padding: 1.5vh;
 	padding-right: 25vw;
@@ -695,15 +860,17 @@ input {
 	position: relative;
 	bottom: 1.7vh;
 	right: 1.8vw;
+	background-color: #4d95ee;
   }
 
   .messages_form_container {
-	background-color: #F6F4EB;
-	position: absolute;
+	background-color: rgb(239, 239, 239);
+	position: fixed;
 	bottom: 0;
 	height: 12vh;
 	width: 75vw;
 	z-index: 5;
+	right: 0;
   }
 
 /* Messages */

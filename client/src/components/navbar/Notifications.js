@@ -26,9 +26,9 @@ function Notifications (props) {
         setIds(requestsIds);
     }
 
-    // useEffect(() => {
-    //     getIncomingRequests(props.userId)
-    // }, [props.userId]);
+    useEffect(() => {
+        getIncomingRequests(props.userId)
+    }, [props.userId]);
 
     return (
         <div className="bell_container">
@@ -38,7 +38,7 @@ function Notifications (props) {
                 : <div></div>}
             <div className="requests_container">
                 {requestsUsernames && requestsUsernames.map((user, index) => (
-                    <a className="notification_user" href={`/profile?id=${requestsIds[index]}`} key={requestsIds[index]}><div className="notification_user_image">{user && user[0] && user[0].toUpperCase()}</div> {user}</a>
+                    <a className="notification_user" href={`/profile?id=${requestsIds[index]}`} key={requestsIds[index]}><div className="notification_user_image">{user && user[0] && user[0].toUpperCase()}</div><div className="notification_user_name">{user}</div></a>
                 ))}
             </div>
         </div>

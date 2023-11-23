@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import appLogo from '../../final_logo.png';
+import appLogo from '../../logo_definitivo.png';
 import SearchUsers from './SearchUsers';
 import Notifications from './Notifications';
 
@@ -47,12 +47,11 @@ function NavBar (props) {
 
     return (
         <div className='navbar_container'>
-            <div className="navbar_image">{props.username && props.username[0] && props.username[0].toUpperCase()}</div>
-            <input type='text'className='search_user_input' placeholder='Find New Friends' onChange={onInputChange}></input>
+            <a href={'/authentication'} className="navbar_image">{props.username && props.username[0] && props.username[0].toUpperCase()}</a>
+            <input type='text'className='search_user_input' placeholder='Find New Friends' onChange={onInputChange} onBlur={(event) => { event.target.value = ''; onInputChange(event);}}></input>
             <img className='logo_image' src={appLogo} alt='Logo'></img>
             <Notifications userId={props.userId}/>
-            <SearchUsers foundUsers={foundUsers}/>
-            <h2>{props.username}</h2>
+            <SearchUsers foundUsers={foundUsers} username={props.username}/>
         </div>
     )
 }

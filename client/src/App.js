@@ -17,11 +17,11 @@ function App() {
 
 
   const [isActive, setIsActive] = useState(false);
-  const [isAuthenticated, setAuthenticated] = useState(true);  // CHANGE BACK TO FALSE
+  const [isAuthenticated, setAuthenticated] = useState(false);  // CHANGE BACK TO FALSE
   const [userId, setId] = useState();
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
-  const [sessionChecked, setSessionChecked] = useState(true); // change back to false
+  const [sessionChecked, setSessionChecked] = useState(false); // change back to false
 
   const changePanel = (event) => {
         setIsActive(current => !current);
@@ -77,17 +77,17 @@ function App() {
         <Routes>
           <Route path='/authentication' element={
             <div className={`container ${isActive ? 'right-panel-active' : ''}`} id='container'>
-                <LoginAndRegister changePanel={changePanel} loadUser={loadUser}/>
+                <LoginAndRegister changePanel={changePanel} loadUser={loadUser} API_URL={API_URL}/>
             </div>
           } />
           <Route path='/' element={
             !sessionChecked ?
               <Loader/> :
               isAuthenticated ?
-                <Home userId={userId} username={username} email={email} io={io}/> :
+                <Home userId={userId} username={username} email={email} io={io} API_URL={API_URL}/> :
                 <Navigate replace to={'/authentication'}/>
           }/>
-          <Route path='/profile' element={<UserProfile id={userId}/>}/>
+          <Route path='/profile' element={<UserProfile id={userId} API_URL={API_URL}/>}/>
           <Route path='/auth/failure' element={<div>Failure</div>}/>
         </Routes>
       </BrowserRouter>

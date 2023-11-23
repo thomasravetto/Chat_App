@@ -5,32 +5,12 @@ import ChatView from './ChatView';
 
 function Home (props) {
 
-    const API_URL = 'https://localhost:3500/v1';
+    const API_URL = props.API_URL;
 
     const [userId, setUserId] = useState(props.userId); // change to props.userId
     const [username, setUsername] = useState(props.username); // change to props.username
     const [email, setEmail] = useState(props.email);
-    const [friendsList, setFriendsList] = useState(
-        [
-            {
-                "id": 18,
-                "username": "sara",
-                "email": "sara@gmail.com",
-                "joined": "2023-11-07T11:17:08.686Z"
-            },
-            {
-                "id": 19,
-                "username": "Thomas Ravetto",
-                "email": "travetto18@gmail.com",
-                "joined": "2023-11-07T12:36:03.114Z"
-            },
-            {
-                "id": 22,
-                "username": "saretta",
-                "email": "ferrarisara@gmail.com",
-                "joined": "2023-11-09T11:53:11.177Z"
-            }
-        ]); // change back to null
+    const [friendsList, setFriendsList] = useState([]); // change back to null
     const [openedChatId, setOpenedChatId] = useState();
 
     async function populateFriendsList (userId) {
@@ -66,6 +46,7 @@ function Home (props) {
 
         if (chatData.id) {
             setOpenedChatId(chatData.id);
+            return friendId;
         } else if (chatData.error === 'No chat was found') {
 
             const resp = await fetch(API_URL + '/chat/create_chat', {
@@ -81,6 +62,7 @@ function Home (props) {
 
             if (newChatData.id) {
                 setOpenedChatId(newChatData.id);
+                return friendId;
             } else if (newChatData.error) {
                 console.error(newChatData);
             }
@@ -90,16 +72,16 @@ function Home (props) {
         }
     }
 
-    // useEffect(() => {
-    //     populateFriendsList(userId);
-    // }, [userId]);
+    useEffect(() => {
+        populateFriendsList(userId);
+    }, [userId]);
 
     return (
         <div>
             <NavBar username={username} userId={userId}/>
             <div className='chat_and_friends_container'>
                 <FriendsList userId={userId} friendsList={friendsList} loadChat={loadChat}/>
-                <ChatView openedChatId={openedChatId} userId={userId} io={props.io}/>
+                <ChatView openedChatId={openedChatId} userId={userId} io={props.io} API_URL={API_URL}/>
             </div>
         </div>
     )

@@ -3,9 +3,9 @@ import { useState } from 'react';
 import GoogleLogo from '../../google_logo.png';
 import { useNavigate } from 'react-router-dom';
 
-const API_URL = 'https://localhost:3500/v1';
-
 function LoginAndRegister(props) {
+
+    const API_URL = props.API_URL;
 
     const navigate = useNavigate();
 

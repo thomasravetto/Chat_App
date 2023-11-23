@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
 import { useLocation, useParams } from "react-router-dom";
 
-const API_URL = 'https://localhost:3500/v1';
-
 function UserProfile (props) {
+
+    const API_URL = props.API_URL;
 
     // Friend requests
     const [isFriend, setIsFriend] = useState(false);
@@ -95,6 +95,19 @@ function UserProfile (props) {
         }
     }
 
+    function formattedDate (dateToFormat) {
+        const date = new Date(dateToFormat);
+        const day = date.getDate();
+        const month = date.getMonth() + 1; // Months are zero-based
+        const year = date.getFullYear();
+
+        // Ensure leading zero for day and month if they are single digits
+        const formattedDay = day < 10 ? `0${day}` : day;
+        const formattedMonth = month < 10 ? `0${month}` : month;
+
+        return `${formattedDay}-${formattedMonth}-${year}`;
+      };
+
     useEffect(() => {
         GetUserData(profileId);
         checkUserFriendship(viewerId, profileId);
@@ -106,22 +119,24 @@ function UserProfile (props) {
 
     return (
         <div className="profile_page">
-            <div className="user_name_image">{profileUsername && profileUsername[0] && profileUsername[0].toUpperCase()}</div>
-            <h2><small style={{fontWeight: 'lighter'}}>Username:</small> { profileUsername }</h2>
-            <p>Joined on: { profileJoined }</p>
+            <div className="username_and_image_container">
+                <div className="user_name_image">{profileUsername && profileUsername[0] && profileUsername[0].toUpperCase()}</div>
+                <h2 className="user_name_name"><small style={{fontWeight: 'lighter'}}>Username:</small> { profileUsername }</h2>
+            </div>
+            <p className="user_joined">Joined on: { formattedDate(profileJoined) }</p>
             {isFriend
-                ? isChatOpen
-                    ? <button>Open Chat</button>
-                    : <button>Start New Chat</button>
+                ? <div className="friends_badge">Friends 🤝</div>
                 : isRequestPending
                     ? isIncomingRequest
                         ? <div className="incoming_request_container">
                             <p className="incoming_request_message">Accept <b>{ profileUsername }</b> friend request:</p>
-                            <button className="accept_button" onClick={() => handleFriendRequest(viewerId, profileId, true)}>&#10003;</button>
-                            <button className="refuse_button" onClick={() => handleFriendRequest(viewerId, profileId, false)}>&#10005;</button>
+                            <div className="button_container">
+                                <button className="accept_button" onClick={() => handleFriendRequest(viewerId, profileId, true)}>&#10003;</button>
+                                <button className="refuse_button" onClick={() => handleFriendRequest(viewerId, profileId, false)}>&#10005;</button>
+                            </div>
                           </div>
-                        : <button>Pending</button>
-                    : <button onClick={() => sendFriendRequest(viewerId, profileId)}>Send Friend request</button>}
+                        : <button className="pending_button">Pending</button>
+                    : <button className="send_req_button" onClick={() => sendFriendRequest(viewerId, profileId)}>Send Friend request</button>}
         </div>
     )
 }

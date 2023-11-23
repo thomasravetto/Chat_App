@@ -17,7 +17,7 @@ async function findUsersByUsername (req, res) {
         });
     } else if (usersData.error) {
         const error = usersData.error;
-        res.status(400).json({ error: error.message });
+        res.status(400).json({ error: error });
     }
 }
 

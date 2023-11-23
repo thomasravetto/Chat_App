@@ -1,10 +1,28 @@
 import { useEffect, useRef, useState } from 'react';
+import React from 'react';
+import friendsFeed from '../../example_images/friends_feed.png';
+import friendsSearchBox from '../../example_images/searchbar.png';
+import friendsNotification from '../../example_images/notifications.png';
 
 function ChatView(props) {
-  const API_URL = 'https://localhost:3500/v1';
+
+  const API_URL = props.API_URL;
+
   const [messages, setMessages] = useState([]);
   const [toBeSentMessage, setToBeSentMessage] = useState('');
-  const chatContainerRef = useRef(null);
+  const messageContainerRef = useRef(null);
+
+  function formattedDate (dateToFormat) {
+    const date = new Date(dateToFormat);
+    const hours = date.getHours();
+    const minutes = date.getMinutes(); // Months are zero-based
+
+    // Ensure leading zero for day and month if they are single digits
+    const formattedHours = hours < 10 ? `0${hours}` : hours;
+    const formattedMinutes = minutes < 10 ? `0${minutes}` : minutes;
+
+    return `${formattedHours}:${formattedMinutes}`;
+  };
 
   async function loadMessages(openedChatId) {
     const resp = await fetch(API_URL + '/messages/get_messages', {
@@ -45,6 +63,7 @@ function ChatView(props) {
   }
 
   function sendMessageOnSocket(socket, chatId, message) {
+    console.log(message);
     if (message) {
       socket.emit('send_message', {chatId, message});
       setMessages(prevMessages => [...prevMessages, message]);
@@ -64,7 +83,7 @@ function ChatView(props) {
         event.preventDefault();
 
         sendMessage(props.openedChatId, props.userId, toBeSentMessage);
-      }
+    }
   }
 
   useEffect(() => {
@@ -78,20 +97,16 @@ function ChatView(props) {
   }, [props.openedChatId]);
 
   useEffect(() => {
-    chatContainerRef.current.scrollTop = chatContainerRef.current.scrollHeight;
+    messageContainerRef.current.scrollTop = messageContainerRef.current.scrollHeight;
   }, [messages]);
 
   useEffect(() => {
     const handleReceiveMessage = (newMessage) => {
-      console.log('new, message', newMessage);
+      console.log('new message', newMessage);
       setMessages(prevMessages => [...prevMessages, newMessage.message]);
     }
 
     props.io.on('receive_message', handleReceiveMessage);
-
-    props.io.on('user_connected', (message) => {
-      console.log(message);
-    })
 
     return () => {
       props.io.off('receive_message', handleReceiveMessage);
@@ -99,7 +114,8 @@ function ChatView(props) {
   }, [ props.io ]);
 
   return (
-    <div className="chat_container" ref={chatContainerRef}>
+    <div className='chat_container'>
+      <div className='message_container' ref={messageContainerRef}>
       {props.openedChatId ? (
         messages.length !== 0 ? (
           messages.map((message) => (
@@ -111,15 +127,40 @@ function ChatView(props) {
                   : 'message sentbyfriend'
               }
             >
-              {message.content}
+              <div className='message_content'>
+                 {message.content.split('\n').map((line, index) => (
+                  <React.Fragment key={index}>
+                    {line}
+                    <br/>
+                  </React.Fragment>
+                  ))}
+              </div>
+              <p className='message_time'>{formattedDate(message.timestamp)}</p>
             </div>
           ))
         ) : (
           <div></div>
         )
       ) : (
-        <div>Select a Chat to open it</div>
+        <div className='no_chat_container'>
+          <h2 className='example_title'>Select a chat to open it...</h2>
+          <img className='friends_feed_image' src={friendsFeed} alt="Friends Feed"></img>
+          <h2 className='example_title'>And if you don't have any friend yet...</h2>
+          <div className='example_images_container'>
+            <div className='example_image'>
+              <h2>search one in the searchbar</h2>
+              <img className='searchbar_friend_image' src={friendsSearchBox} alt="Searchbar Friend"></img>
+            </div>
+            <h2>or</h2>
+            <div className='example_image'>
+              <h2>check if someone has sent you a request</h2>
+              <img className='notification_friend_image' src={friendsNotification} alt="Notification Friend"></img>
+            </div>
+          </div>
+        </div>
+
       )}
+      </div>
       <div className='messages_form_container'>
         <div className='messages_form'>
             <textarea onChange={onMessageChange} onKeyDown={handleKeyPress} type='text' className='messages_input' value={toBeSentMessage} rows={1}></textarea>
