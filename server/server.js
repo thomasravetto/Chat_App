@@ -1,6 +1,6 @@
 require('dotenv').config();
 const fs = require('fs');
-const https = require('https');
+const https = require('http'); // set back to https
 const { Server } = require('socket.io');
 
 const appRouter = require('./appRouter');
@@ -39,7 +39,7 @@ io.on('connection', (socket) => {
 });
 
 function startServer () {
-    server.listen(PORT, () => {
+    server.listen(PORT, '0.0.0.0', () => { // Change back to normal
         console.log('Server listening on port: ', PORT);
     })
 }
