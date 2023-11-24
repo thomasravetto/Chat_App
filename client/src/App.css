@@ -648,6 +648,64 @@ input {
 	color: red;
   }
 
+  /* Profile Loader */
+
+  .loader-container {
+	box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+	height: 100%; /* Set the height as needed */
+	border-radius: 10px;
+  }
+
+ .loader-image {
+	background: linear-gradient(110deg, #ececec 8%, #f5f5f5 18%, #ececec 33%);
+	width: 15vh;
+	height: 15vh;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-size: 7vh;
+	font-weight: 500;
+	border-radius: 50%;
+	position: relative;
+	transform: translate(-50%);
+	left: 50%;
+	top: 5vh;
+	animation: 1s shine linear infinite;
+ }
+  
+ .loader-username {
+	background: linear-gradient(110deg, #ececec 8%, #f5f5f5 18%, #ececec 33%);
+	width: 13vw;
+	height: 3vh;
+	margin-top: 10px;
+	position: relative;
+	top: 7vh;
+	left: 50%;
+	transform: translate(-50%);
+	border-radius: 20px;
+	animation: 1s shine linear infinite;
+ }
+
+ .loader-button {
+	background: linear-gradient(110deg, #ececec 8%, #f5f5f5 18%, #ececec 33%);
+	position: relative;
+	width: 14vw;
+	height: 10vh;
+	top: 12vh;
+	transform: translate(-50%);
+	left: 50%;
+	border-radius: 20px;
+	animation: 1s shine linear infinite;
+ }
+
+ @keyframes shine {
+	to {
+	  background-position-x: 200px;
+	}
+  }
+
+  /* Profile Loader */
+
 
 /* Profile Page */
 

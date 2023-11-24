@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { BrowserRouter, Routes, Route, Navigate, useNavigate } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate, } from "react-router-dom";
 
 import LoginAndRegister from './components/authentication/LoginAndRegister';
 import Home from './components/homepage/Home';
@@ -9,9 +9,9 @@ import UserProfile from './components/user_profile/UserProfile';
 
 import socket from 'socket.io-client';
 
-const API_URL = 'https://localhost:3500/v1';
+const API_URL = 'https://5zx5qp51-3500.euw.devtunnels.ms/v1/'; //change to localhost
 
-const io = socket.connect('https://localhost:3500');
+const io = socket.connect('https://5zx5qp51-3500.euw.devtunnels.ms/');
 
 function App() {
 

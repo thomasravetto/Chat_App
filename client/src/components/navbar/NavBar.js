@@ -3,10 +3,11 @@ import appLogo from '../../logo_definitivo.png';
 import SearchUsers from './SearchUsers';
 import Notifications from './Notifications';
 
-const API_URL = 'https://localhost:3500/v1';
 let timer;
 
 function NavBar (props) {
+
+    const API_URL = props.API_URL;
 
     const [foundUsers, setFoundUsers] = useState();
 
@@ -50,7 +51,7 @@ function NavBar (props) {
             <a href={'/authentication'} className="navbar_image">{props.username && props.username[0] && props.username[0].toUpperCase()}</a>
             <input type='text'className='search_user_input' placeholder='Find New Friends' onChange={onInputChange} onBlur={(event) => { event.target.value = ''; onInputChange(event);}}></input>
             <img className='logo_image' src={appLogo} alt='Logo'></img>
-            <Notifications userId={props.userId}/>
+            <Notifications userId={props.userId} API_URL={API_URL}/>
             <SearchUsers foundUsers={foundUsers} username={props.username}/>
         </div>
     )

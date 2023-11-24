@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import BellLogo from '../../bell_image.png';
 
-const API_URL = 'https://localhost:3500/v1';
-
 function Notifications (props) {
+
+    const API_URL = props.API_URL;
 
     const [requestsUsernames, setUsernames] = useState([]);
     const [requestsIds, setIds] = useState([]);

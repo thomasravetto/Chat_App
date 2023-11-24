@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useLocation, useParams } from "react-router-dom";
+import ProfileLoader from './ProfileLoader';
 
 function UserProfile (props) {
 
@@ -10,6 +11,8 @@ function UserProfile (props) {
     const [isRequestPending, setPendingRequest] = useState(false);
     const [isIncomingRequest, setIncomingRequest] = useState(false);
     const [isChatOpen, setIsChatOpen] = useState(false);
+
+    const [isLoading, setIsLoading] = useState(true);
 
     // Profile
     const [profileJoined, setJoined] = useState('');
@@ -70,8 +73,6 @@ function UserProfile (props) {
 
         const data = await resp.json();
 
-        console.log(data);
-
         if (data.id) {
             setPendingRequest(true);
         }
@@ -109,36 +110,68 @@ function UserProfile (props) {
       };
 
     useEffect(() => {
-        GetUserData(profileId);
-        checkUserFriendship(viewerId, profileId);
-    }, [profileId, viewerId]);
+        async function fetchData() {
+            await GetUserData(profileId);
+            await checkUserFriendship(viewerId, profileId);
+            setIsLoading(false);
+          }
 
-    useEffect(() => {
-        console.log(isRequestPending, isIncomingRequest);
-    }, [isRequestPending, isIncomingRequest]);
+          fetchData();
+    }, [profileId, viewerId]);
 
     return (
         <div className="profile_page">
-            <div className="username_and_image_container">
-                <div className="user_name_image">{profileUsername && profileUsername[0] && profileUsername[0].toUpperCase()}</div>
-                <h2 className="user_name_name"><small style={{fontWeight: 'lighter'}}>Username:</small> { profileUsername }</h2>
+          {isLoading ? (
+            <ProfileLoader />
+          ) : (
+            <div>
+              <div className="username_and_image_container">
+                <div className="user_name_image">
+                  {profileUsername && profileUsername[0] && profileUsername[0].toUpperCase()}
+                </div>
+                <h2 className="user_name_name">
+                  <small style={{ fontWeight: 'lighter' }}>Username:</small> {profileUsername}
+                </h2>
+              </div>
+              <p className="user_joined">Joined on: {formattedDate(profileJoined)}</p>
+              {isFriend ? (
+                <div className="friends_badge">Friends 🤝</div>
+              ) : isRequestPending ? (
+                isIncomingRequest ? (
+                  <div className="incoming_request_container">
+                    <p className="incoming_request_message">
+                      Accept <b>{profileUsername}</b> friend request:
+                    </p>
+                    <div className="button_container">
+                      <button
+                        className="accept_button"
+                        onClick={() => handleFriendRequest(viewerId, profileId, true)}
+                      >
+                        &#10003;
+                      </button>
+                      <button
+                        className="refuse_button"
+                        onClick={() => handleFriendRequest(viewerId, profileId, false)}
+                      >
+                        &#10005;
+                      </button>
+                    </div>
+                  </div>
+                ) : (
+                  <button className="pending_button">Pending</button>
+                )
+              ) : (
+                <button
+                  className="send_req_button"
+                  onClick={() => sendFriendRequest(viewerId, profileId)}
+                >
+                  Send Friend request
+                </button>
+              )}
             </div>
-            <p className="user_joined">Joined on: { formattedDate(profileJoined) }</p>
-            {isFriend
-                ? <div className="friends_badge">Friends 🤝</div>
-                : isRequestPending
-                    ? isIncomingRequest
-                        ? <div className="incoming_request_container">
-                            <p className="incoming_request_message">Accept <b>{ profileUsername }</b> friend request:</p>
-                            <div className="button_container">
-                                <button className="accept_button" onClick={() => handleFriendRequest(viewerId, profileId, true)}>&#10003;</button>
-                                <button className="refuse_button" onClick={() => handleFriendRequest(viewerId, profileId, false)}>&#10005;</button>
-                            </div>
-                          </div>
-                        : <button className="pending_button">Pending</button>
-                    : <button className="send_req_button" onClick={() => sendFriendRequest(viewerId, profileId)}>Send Friend request</button>}
+          )}
         </div>
-    )
+      );
 }
 
 export default UserProfile;

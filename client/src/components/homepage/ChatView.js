@@ -63,7 +63,6 @@ function ChatView(props) {
   }
 
   function sendMessageOnSocket(socket, chatId, message) {
-    console.log(message);
     if (message) {
       socket.emit('send_message', {chatId, message});
       setMessages(prevMessages => [...prevMessages, message]);
@@ -102,7 +101,6 @@ function ChatView(props) {
 
   useEffect(() => {
     const handleReceiveMessage = (newMessage) => {
-      console.log('new message', newMessage);
       setMessages(prevMessages => [...prevMessages, newMessage.message]);
     }
 

@@ -7,6 +7,8 @@ function Home (props) {
 
     const API_URL = props.API_URL;
 
+    console.log(API_URL);
+
     const [userId, setUserId] = useState(props.userId); // change to props.userId
     const [username, setUsername] = useState(props.username); // change to props.username
     const [email, setEmail] = useState(props.email);
@@ -78,7 +80,7 @@ function Home (props) {
 
     return (
         <div>
-            <NavBar username={username} userId={userId}/>
+            <NavBar username={username} userId={userId} API_URL={API_URL}/>
             <div className='chat_and_friends_container'>
                 <FriendsList userId={userId} friendsList={friendsList} loadChat={loadChat}/>
                 <ChatView openedChatId={openedChatId} userId={userId} io={props.io} API_URL={API_URL}/>
