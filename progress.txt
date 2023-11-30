@@ -1,1 +1,25 @@
 La funzione delle amicizie dovrebbe essere finita, devo aggiungere una cosa che dica che la richiesta è stata rifiutata
+
+Quando entro, la funzione fetcha gli amici dell'utente, insieme a questo dovrò anche fetchare le chat aperte da quell'utente.
+Se una chat con quell'amico è presente, allora dovrò mettere un bottone che carichi i messaggi della chat, se invece la chat
+non è ancora stata aperta, allora dovrò mettere un bottone che inserisca una nuova chat nel database.
+
+fetchare chat aperte (username):
+    carico chat dove username è presente in uno dei due utenti
+    per ogni chat dovrò salvare l'id
+
+caricare i messaggi della chat (id):
+    nella table dei messaggi, dovrò caricare tutti i messaggi contenuti nella chat con un certo id
+
+creare nuova chat:
+    nella table delle chat, dovrò creare una nuova chat, con id e utenti
+
+Una volta che una chat è aperta, dovrò connettermi al socket, una volta connesso dovrò implementare una funzione
+che mandi il messaggio.
+
+mandare un nuovo messaggio (testo):
+    questa funzione dovrà ricevere del testo che sarà poi salvato come messaggio. Il messaggio dovrà essere salvato nella
+    table dei messaggi, con id della chat e mittente del messaggio, insieme anche alla data dell'invio, in questo modo
+    quando userò la funzione che carica i messaggi anche i messaggi nuovi verranno salvati.
+    La cosa complicata sarà riuscire a mandare anche i messaggi al socket, in modo che l'altro utente li possa vedere
+    subito.

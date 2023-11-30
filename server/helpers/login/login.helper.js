@@ -4,6 +4,7 @@ const { findUserByEmail, getUserData } = require('../../app/login/login.data-acc
 
 // Function to log in user
 async function handleLogin (email, password) {
+    console.log('santi numi');
     try {
         const userData = await findUserByEmail(email);
 

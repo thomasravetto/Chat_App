@@ -1,6 +1,6 @@
 require('dotenv').config();
 const fs = require('fs');
-const https = require('http'); // set back to https
+const https = require('https'); // set back to https
 const { Server } = require('socket.io');
 
 const appRouter = require('./appRouter');
@@ -8,8 +8,8 @@ const appRouter = require('./appRouter');
 const PORT = process.env.PORT || 3500;
 
 const options = {
-    key: fs.readFileSync('./key.pem'),
-    cert: fs.readFileSync('./cert.pem')
+    key: fs.readFileSync(process.env.KEY_LOCATION),
+    cert: fs.readFileSync(process.env.CERT_LOCATION)
 }
 
 const server = https.createServer(options, appRouter); // Creating HTTPS server
@@ -39,7 +39,7 @@ io.on('connection', (socket) => {
 });
 
 function startServer () {
-    server.listen(PORT, '0.0.0.0', () => { // Change back to normal
+    server.listen(PORT, () => { // Change back to normal
         console.log('Server listening on port: ', PORT);
     })
 }

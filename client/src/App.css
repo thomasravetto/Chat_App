@@ -297,7 +297,7 @@ input {
 	width: 16px;
 	height: 16px;
 	border-radius: 50%;
-	background-color: #fff;
+	background-color: #4680ff;
 	box-shadow: 32px 0 #fff, -32px 0 #fff;
 	position: relative;
 	animation: flash 0.5s ease-out infinite alternate;
@@ -305,16 +305,16 @@ input {
 
   @keyframes flash {
 	0% {
-	  background-color: #FFF2;
-	  box-shadow: 32px 0 #FFF2, -32px 0 #FFF;
+	  background-color: #375492;
+	  box-shadow: 32px 0 #375492, -32px 0 #4680ff;
 	}
 	50% {
-	  background-color: #FFF;
-	  box-shadow: 32px 0 #FFF2, -32px 0 #FFF2;
+	  background-color: #4680ff;
+	  box-shadow: 32px 0 #375492, -32px 0 #375492;
 	}
 	100% {
-	  background-color: #FFF2;
-	  box-shadow: 32px 0 #FFF, -32px 0 #FFF2;
+	  background-color: #375492;
+	  box-shadow: 32px 0 #4680ff, -32px 0 #375492;
 	}
   }
 
@@ -602,6 +602,12 @@ input {
 	width: 14vw;
 	transform: translate(-50%);
 	left: 7vw;
+	transition: 0.2s;
+  }
+
+  .send_req_button:active, .pending_button:active {
+	transform: translate(-50%);
+	background-color: #335eba;
   }
 
   .incoming_request_container {
@@ -905,6 +911,7 @@ input {
 	width: 50vw;
 	border-radius: 8px;
 	padding: 20px 0px;
+	padding-left: 10px;
 	resize: none;
 	overflow: hidden;
 	height: 4vh;

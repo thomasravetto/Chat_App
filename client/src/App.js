@@ -9,9 +9,11 @@ import UserProfile from './components/user_profile/UserProfile';
 
 import socket from 'socket.io-client';
 
-const API_URL = 'https://5zx5qp51-3500.euw.devtunnels.ms/v1/'; //change to localhost
+const SERVER_URL = window.location.origin;
 
-const io = socket.connect('https://5zx5qp51-3500.euw.devtunnels.ms/');
+const API_URL = '/v1'; //change to localhost
+
+const io = socket.connect(SERVER_URL);
 
 function App() {
 

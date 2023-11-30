@@ -3,6 +3,7 @@ const path = require('path');
 const helmet = require('helmet');
 const morgan = require('morgan');
 const session = require('express-session');
+const cors = require('cors');
 
 const app = express();
 
@@ -19,10 +20,12 @@ app.use(session({
     resave: false,
     saveUninitialized: false,
     cookie: {
-        secure: true,  // Set to true if using HTTPS
+        secure: true,  // Set back to true if using HTTPS
         maxAge: 24 * 60 * 60 * 1000,  // 24 hours in milliseconds
     },
 }))
+
+app.use(cors());
 
 app.use(helmet());
 app.use(morgan('combined'));

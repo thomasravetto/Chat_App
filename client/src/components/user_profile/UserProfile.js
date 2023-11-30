@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useLocation, useParams } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import ProfileLoader from './ProfileLoader';
 
 function UserProfile (props) {
@@ -10,7 +10,6 @@ function UserProfile (props) {
     const [isFriend, setIsFriend] = useState(false);
     const [isRequestPending, setPendingRequest] = useState(false);
     const [isIncomingRequest, setIncomingRequest] = useState(false);
-    const [isChatOpen, setIsChatOpen] = useState(false);
 
     const [isLoading, setIsLoading] = useState(true);
 
@@ -110,7 +109,7 @@ function UserProfile (props) {
       };
 
     useEffect(() => {
-        async function fetchData() {
+        async function fetchData () {
             await GetUserData(profileId);
             await checkUserFriendship(viewerId, profileId);
             setIsLoading(false);
