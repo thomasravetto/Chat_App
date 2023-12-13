@@ -23,7 +23,9 @@ async function getUserInfoHelper (id) {
 async function checkFriendshipHelper (viewerUserId, profileUserId) {
     const friendshipData = await getFriendshipData(viewerUserId, profileUserId);
 
-    if (friendshipData.length !== 0) {
+    console.log(friendshipData);
+
+    if (friendshipData && friendshipData.length !== 0) {
         return friendshipData[0];
     } else {
         return { error: 'No friendship was found in db' };

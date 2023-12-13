@@ -9,7 +9,6 @@ async function registerGoogleUserIntoDatabase (username, email, done) {
 
         if (existingUser.length > 0) {
             await trx.commit();
-            console.log(existingUser);
             return existingUser[0];
         } else {
                 const user = await trx('users')
@@ -21,7 +20,6 @@ async function registerGoogleUserIntoDatabase (username, email, done) {
                 .returning('*');
 
             await trx.commit();
-            console.log(user)
             return user[0];
         }
     } catch (error) {

@@ -18,8 +18,6 @@ async function registerUser (req, res) {
 
         const newUser = await handleRegister(username, email,  password);
 
-        console.log('controller', newUser);
-
         if (newUser && newUser.email) {
             req.session.userid = newUser.id;
             req.session.username = newUser.username;
